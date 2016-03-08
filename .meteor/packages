@@ -26,3 +26,5 @@ jagi:astronomy-relations
 jagi:astronomy-validators
 jagi:astronomy-simple-validators
 http
+kadira:flow-router
+kadira:react-layout
