@@ -15,12 +15,12 @@ Globals.RiverInstrument = Astro.Class({
       simpleValidator: 'required,string'
     },
     lat: {
-      type: 'string',
-      simpleValidator: 'required,string'
+      type: 'number',
+      simpleValidator: 'required,number'
     },
-    lon: {
-      type: 'string',
-      simpleValidator: 'required,string'
+    lng: {
+      type: 'number',
+      simpleValidator: 'required,number'
     }
   },
   relations: {
