@@ -1,8 +1,8 @@
 'use strict';
 
-console.log(Globals);
-
-new River({
-  _id: '1',
-  name: 'Blackfoot'
-}).save();
+if (Rivers.find().count() === 0) {
+  new River({
+    _id: '1',
+    name: 'Blackfoot'
+  }).save();
+}
