@@ -28,12 +28,6 @@ Globals.River = Astro.Class({
 });
 
 if (Meteor.isServer) {
-  if (Rivers.find().count() === 0) {
-    const blackfoot = new River();
-    blackfoot.set('name', 'Blackfoot');
-    blackfoot.save();
-  }
-
   Meteor.publish('rivers', () => Rivers.find());
 }
 

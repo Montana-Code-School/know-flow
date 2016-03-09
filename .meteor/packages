@@ -28,3 +28,9 @@ jagi:astronomy-simple-validators
 http
 kadira:flow-router
 kadira:react-layout
+meteorhacks:npm
+cosmos:browserify
+
+
+npm-container
+dburles:google-maps
