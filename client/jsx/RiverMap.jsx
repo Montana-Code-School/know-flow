@@ -42,14 +42,28 @@ Globals.RiverMap = React.createClass({
     if(Mapbox.loaded()) {
       const map = L.mapbox.map('map-container', MAPBOX_MAP_ID, this._mapOptions());
 
-      this.props.river.accesses().fetch().forEach(a => {
-        L.marker([a.lat, a.lng]).addTo(map);
+      this.props.river.accesses().fetch().forEach(access => {
+        const marker = L.marker([access.lat, access.lng]);
+        this._addPopupToMarker(marker, access);
+        marker.addTo(map);
       });
     }
   },
 
+  _addPopupToMarker(marker, access) {
+    const html = React.renderToString(
+      <ul>
+        <li>{access.name}</li>
+        <li>Put-in: {'' + access.putIn}</li>
+        <li>Take-out: {'' + access.takeOut}</li>
+      </ul>
+    );
+
+    marker.bindPopup(html).openPopup();
+  },
+
   render() {
-    return <div id="map-container"></div>;
+    return <div id="map-container" ></div>;
   }
 });
 
