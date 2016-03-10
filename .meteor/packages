@@ -33,4 +33,5 @@ cosmos:browserify
 
 
 npm-container
-dburles:google-maps
+pauloborges:mapbox
+less
