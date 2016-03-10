@@ -21,6 +21,14 @@ Globals.RiverAccess = Astro.Class({
     lng: {
       type: 'number',
       simpleValidator: 'required,number'
+    },
+    putIn: {
+      type: 'boolean',
+      simpleValidator: 'required,boolean'
+    },
+    takeOut: {
+      type: 'boolean',
+      simpleValidator: 'required,boolean'
     }
   }
 });
