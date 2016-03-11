@@ -21,8 +21,6 @@ Globals.AccessMarker = React.createClass({
   },
 
   componentDidUpdate() {
-    console.log('access marker did update');
-
     if (! this.state.markerReady) {
       this._createMarker();
     }

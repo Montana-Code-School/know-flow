@@ -65,7 +65,7 @@ Globals.RiverMap = React.createClass({
   render() {
     let children = null;
     if (this.state.mapReady && this.data.accessesReady) {
-      children = this.data.accesses.map(access => <AccessMarker map={this.state.map} access={access} />);
+      children = this.data.accesses.map(access => <AccessMarker key={access._id} map={this.state.map} access={access} />);
     }
 
     return (
