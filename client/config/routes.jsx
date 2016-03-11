@@ -20,3 +20,11 @@ FlowRouter.route('/teague', {
     ReactLayout.render(TeagueLayout);
   }
 });
+
+FlowRouter.route('/', {
+  name: 'App',
+  action() {
+    ReactLayout.render(App);
+  }
+});
+
