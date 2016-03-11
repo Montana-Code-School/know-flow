@@ -13,31 +13,24 @@ Globals.RiverMap = React.createClass({
   getInitialState() {
     return {
       map: null,
+      mapReady: false,
       accessMarkers: []
     }
   },
 
   getMeteorData() {
+    const accesses = this.props.river.accesses().fetch();
+
     return {
-      ready: Mapbox.loaded(),
-      accesses: this.props.river.accesses().fetch()
+      mapboxReady: Mapbox.loaded(),
+      accesses: accesses,
+      accessesReady: accesses.length > 0
     };
   },
 
   componentDidUpdate() {
-    if (this.data.ready) {
-
-      if (! this.state.map) {
-        this.setState({
-          map: this._createMap()
-        });
-      }
-
-      if (this.state.map && this.state.accessMarkers.length === 0 && this.data.accesses.length > 0) {
-        this.setState({
-          accessMarkers: this._addAccessMarkers()
-        });
-      }
+    if (this.data.mapboxReady && ! this.state.mapReady) {
+        this._createMap();
     }
   },
 
@@ -62,39 +55,23 @@ Globals.RiverMap = React.createClass({
   },
 
   _createMap() {
-    return L.mapbox.map('map-container', MAPBOX_MAP_ID, this._mapOptions());
-  },
-
-  _addAccessMarkers() {
-
-    return this.data.accesses.map(access => {
-      const marker = L.marker([access.lat, access.lng]);
-      this._addPopupToMarker(marker, access);
-      marker.addTo(this.state.map);
-      return marker;
+    const map = L.mapbox.map('map-container', MAPBOX_MAP_ID, this._mapOptions());
+    this.setState({
+      map: map,
+      mapReady: true
     });
-  },
-
-  _addPopupToMarker(marker, access) {
-    const html = React.renderToString(
-      <ul>
-        <li>{access.name}</li>
-        <li>Put-in: {'' + access.putIn}</li>
-        <li>Take-out: {'' + access.takeOut}</li>
-      </ul>
-    );
-
-    const popup = L.popup({
-      className: 'access-popup'
-    });
-    popup.setContent(html);
-
-    marker.bindPopup(popup).openPopup();
   },
 
   render() {
-    return <div id="map-container"></div>;
+    let children = null;
+    if (this.state.mapReady && this.data.accessesReady) {
+      children = this.data.accesses.map(access => <AccessMarker map={this.state.map} access={access} />);
+    }
+
+    return (
+      <div id="map-container">
+        {children}
+      </div>
+    )
   }
 });
-
-//https://api.mapbox.com/styles/v1/jcheroske/cilml8oqx007rabkquhbi36rr.html?title=true&access_token=pk.eyJ1IjoiamNoZXJvc2tlIiwiYSI6ImNpbG1rcTh5aTY4OWV0c2twNjRxNXlpcXEifQ.w4AILHfUs8_KCXQK8cxQSA#11/46.65179699999922/-114.05426000000021/0
