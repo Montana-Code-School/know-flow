@@ -9,6 +9,10 @@ Globals.River = Astro.Class({
     name: {
       type: 'string',
       simpleValidator: 'required,string'
+    },
+    defaultInstrumentId: {
+      type: 'string',
+      simpleValidator: 'required,string'
     }
   },
   relations: {
@@ -23,6 +27,12 @@ Globals.River = Astro.Class({
       class: 'RiverInstrument',
       local: '_id',
       foreign: 'riverId'
+    },
+    defaultInstrument: {
+      type: 'one',
+      class: 'RiverInstrument',
+      local: 'defaultInstrumentId',
+      foreign: '_id'
     }
   }
 });

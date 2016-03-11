@@ -1,5 +1,3 @@
 'use strict';
 
-Meteor.startup(function(){
-  Mapbox.load();
-});
+Meteor.startup( () => Mapbox.load() );

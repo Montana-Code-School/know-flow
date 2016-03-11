@@ -3,7 +3,8 @@
 if (Rivers.find().count() === 0) {
   new River({
     _id: '1',
-    name: 'Blackfoot'
+    name: 'Blackfoot',
+    defaultInstrumentId: '1'
   }).save();
 }
 
@@ -136,5 +137,16 @@ if (RiverAccesses.find().count() === 0) {
     lng: -114.051362,
     putIn: true,
     takeOut: true
+  }).save();
+}
+
+if (RiverInstruments.find().count() === 0) {
+  new RiverInstrument({
+    _id: '1',
+    riverId: '1',
+    siteId: '12350250',
+    name: 'Bitterroot River at Bell Crossing nr Victor MT',
+    lat: 46.4432,
+    lng: - 114.1237667
   }).save();
 }

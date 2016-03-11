@@ -35,3 +35,4 @@ cosmos:browserify
 npm-container
 pauloborges:mapbox
 less
+percolate:synced-cron

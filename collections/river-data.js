@@ -14,7 +14,11 @@ Globals.RiverDatum = Astro.Class({
       type: 'date',
       simpleValidator: 'required,date'
     },
-    cfm: {
+    paramCode: {
+      type: 'string',
+      simpleValidator: 'required,string'
+    },
+    paramValue: {
       type: 'number',
       simpleValidator: 'required,number'
     }
@@ -23,6 +27,6 @@ Globals.RiverDatum = Astro.Class({
 
 if (Meteor.isServer) { // TODO: need to use riverId here
   const d = new Date();
-  d.setDate(d.getDate() - 2);
+  d.setDate(d.getDate() - 1);
   Meteor.publish('river-data', () => RiverData.find({timestamp: {$gte: d}}));
 }

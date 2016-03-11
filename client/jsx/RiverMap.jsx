@@ -10,12 +10,35 @@ Globals.RiverMap = React.createClass({
     river: React.PropTypes.object.isRequired
   },
 
+  getInitialState() {
+    return {
+      map: null,
+      accessMarkers: []
+    }
+  },
+
   getMeteorData() {
     return {
-      loaded: Mapbox.loaded(),
-      map: this._createMap(),
+      ready: Mapbox.loaded(),
       accesses: this.props.river.accesses().fetch()
     };
+  },
+
+  componentDidUpdate() {
+    if (this.data.ready) {
+
+      if (! this.state.map) {
+        this.setState({
+          map: this._createMap()
+        });
+      }
+
+      if (this.state.map && this.state.accessMarkers.length === 0 && this.data.accesses.length > 0) {
+        this.setState({
+          accessMarkers: this._addAccessMarkers()
+        });
+      }
+    }
   },
 
   _mapOptions() {
@@ -23,8 +46,8 @@ Globals.RiverMap = React.createClass({
 
     return {
       accessToken: MAPBOX_ACCESS_TOKEN,
-      center: [46.651797, -114.054260],
-      maxBounds: [[46.714841, -113.998347], [45.889571, -114.219819]],
+      center: [46.651797, - 114.054260],
+      maxBounds: [[46.714841, - 113.998347], [45.889571, - 114.219819]],
       zoom: ZOOM_LEVEL,
       minZoom: ZOOM_LEVEL,
       maxZoom: ZOOM_LEVEL,
@@ -39,15 +62,17 @@ Globals.RiverMap = React.createClass({
   },
 
   _createMap() {
-    if(Mapbox.loaded()) {
-      const map = L.mapbox.map('map-container', MAPBOX_MAP_ID, this._mapOptions());
+    return L.mapbox.map('map-container', MAPBOX_MAP_ID, this._mapOptions());
+  },
 
-      this.props.river.accesses().fetch().forEach(access => {
-        const marker = L.marker([access.lat, access.lng]);
-        this._addPopupToMarker(marker, access);
-        marker.addTo(map);
-      });
-    }
+  _addAccessMarkers() {
+
+    return this.data.accesses.map(access => {
+      const marker = L.marker([access.lat, access.lng]);
+      this._addPopupToMarker(marker, access);
+      marker.addTo(this.state.map);
+      return marker;
+    });
   },
 
   _addPopupToMarker(marker, access) {
@@ -59,11 +84,16 @@ Globals.RiverMap = React.createClass({
       </ul>
     );
 
-    marker.bindPopup(html).openPopup();
+    const popup = L.popup({
+      className: 'access-popup'
+    });
+    popup.setContent(html);
+
+    marker.bindPopup(popup).openPopup();
   },
 
   render() {
-    return <div id="map-container" ></div>;
+    return <div id="map-container"></div>;
   }
 });
 
