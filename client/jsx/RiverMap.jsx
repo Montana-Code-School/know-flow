@@ -7,7 +7,8 @@ Globals.RiverMap = React.createClass({
   mixins: [ReactMeteorData],
 
   propTypes: {
-    river: React.PropTypes.object.isRequired
+    river: React.PropTypes.object.isRequired,
+    accessSelected: React.PropTypes.func.isRequired
   },
 
   getMeteorData() {
@@ -19,7 +20,7 @@ Globals.RiverMap = React.createClass({
   },
 
   _mapOptions() {
-    const ZOOM_LEVEL = 11;
+    const ZOOM_LEVEL = 12;
 
     return {
       center: [46.651797, - 114.054260],
@@ -39,7 +40,8 @@ Globals.RiverMap = React.createClass({
 
   render() {
     if (this.data.accessesReady) {
-      const markers = this.data.accesses.map(access => <AccessMarker key={access._id} access={access} />);
+      const markers = 
+        this.data.accesses.map(access => <AccessMarker key={access._id} access={access} onClick={this.props.accessSelected} />);
 
       return (
         <MapboxLoader accessToken={MAPBOX_ACCESS_TOKEN} gl={true} plugins={['label']} >

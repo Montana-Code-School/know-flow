@@ -3,7 +3,8 @@
 Globals.AccessMarker = React.createClass({
 
   propTypes: {
-   access: React.PropTypes.object.isRequired
+   access: React.PropTypes.object.isRequired,
+   onClick: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
@@ -12,11 +13,8 @@ Globals.AccessMarker = React.createClass({
     }
   },
 
-  handleClick() {
-    const newIcon = this.state.currentIcon === 'blue' ? 'green' : 'blue';
-    this.setState({
-      currentIcon: newIcon
-    });
+  handleClick(event) {
+    this.props.onClick(this.props.access);
   },
 
   render() {
@@ -24,7 +22,7 @@ Globals.AccessMarker = React.createClass({
 
     return (
       <Marker latlng={[this.props.access.lat, this.props.access.lng]} onClick={this.handleClick}>
-          <MarkerIcon url={iconUrl} height={25} width={25} />
+          <MarkerIcon url={iconUrl} height={35} width={35} />
 
           <MarkerPopup options={{className: 'access-popup'}}>
             <ul>
