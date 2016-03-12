@@ -3,58 +3,38 @@
 Globals.AccessMarker = React.createClass({
 
   propTypes: {
-    map: React.PropTypes.object.isRequired,
-    access: React.PropTypes.object.isRequired
+   access: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
     return {
-      marker: null,
-      markerReady: false
+      currentIcon: 'blue'
     }
   },
 
-  componentDidMount() {
-    if (! this.state.markerReady) {
-      this._createMarker();
-    }
-  },
-
-  componentDidUpdate() {
-    if (! this.state.markerReady) {
-      this._createMarker();
-    }
-  },
-
-  _createMarker() {
-    const access = this.props.access;
-    const marker = L.marker([access.lat, access.lng]);
-    this._addPopupToMarker(marker, access);
-    marker.addTo(this.props.map);
+  handleClick() {
+    const newIcon = this.state.currentIcon === 'blue' ? 'green' : 'blue';
     this.setState({
-      marker: marker,
-      markerReady: true
+      currentIcon: newIcon
     });
-  },
-
-  _addPopupToMarker(marker, access) {
-    const html = React.renderToString(
-      <ul>
-        <li>{access.name}</li>
-        <li>Put-in: {'' + access.putIn}</li>
-        <li>Take-out: {'' + access.takeOut}</li>
-      </ul>
-    );
-
-    const popup = L.popup({
-      className: 'access-popup'
-    });
-    popup.setContent(html);
-
-    marker.bindPopup(popup).openPopup();
   },
 
   render() {
-    return null;
+    const iconUrl = '/icons/wp-' + this.state.currentIcon + '.png';
+
+    return (
+      <Marker latlng={[this.props.access.lat, this.props.access.lng]} onClick={this.handleClick}>
+          <MarkerIcon url={iconUrl} height={25} width={25} />
+
+          <MarkerPopup options={{className: 'access-popup'}}>
+            <ul>
+              <li>{this.props.access.name}</li>
+              <li>Put-in: {'' + this.props.access.putIn}</li>
+              <li>Take-out: {'' + this.props.access.takeOut}</li>
+              <li>{this.state.currentIcon}</li>
+            </ul>
+          </MarkerPopup>
+      </Marker>
+    )
   }
 });

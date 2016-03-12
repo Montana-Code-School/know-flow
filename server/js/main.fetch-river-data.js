@@ -32,7 +32,7 @@ const fetchRiverDataFromUSGS = () => {
       }
     });
   });
-}
+};
 
 const purgeOldRiverData = () => {
   const oldRecords = RiverData.find().fetch().sort((a, b) => a.timestamp - b.timestamp).reverse().slice(NUM_RIVER_DATUM_TO_KEEP);

@@ -10,35 +10,18 @@ Globals.RiverMap = React.createClass({
     river: React.PropTypes.object.isRequired
   },
 
-  getInitialState() {
-    return {
-      map: null,
-      mapReady: false,
-      accessMarkers: []
-    }
-  },
-
   getMeteorData() {
     const accesses = this.props.river.accesses().fetch();
-
     return {
-      mapboxReady: Mapbox.loaded(),
       accesses: accesses,
       accessesReady: accesses.length > 0
     };
-  },
-
-  componentDidUpdate() {
-    if (this.data.mapboxReady && ! this.state.mapReady) {
-        this._createMap();
-    }
   },
 
   _mapOptions() {
     const ZOOM_LEVEL = 11;
 
     return {
-      accessToken: MAPBOX_ACCESS_TOKEN,
       center: [46.651797, - 114.054260],
       maxBounds: [[46.714841, - 113.998347], [45.889571, - 114.219819]],
       zoom: ZOOM_LEVEL,
@@ -50,28 +33,23 @@ Globals.RiverMap = React.createClass({
       boxZoom: false,
       bounceAtZoomLimits: false,
       zoomControl: false,
-      dragging: true,
+      dragging: true
     }
-  },
-
-  _createMap() {
-    const map = L.mapbox.map('map-container', MAPBOX_MAP_ID, this._mapOptions());
-    this.setState({
-      map: map,
-      mapReady: true
-    });
   },
 
   render() {
-    let children = null;
-    if (this.state.mapReady && this.data.accessesReady) {
-      children = this.data.accesses.map(access => <AccessMarker key={access._id} map={this.state.map} access={access} />);
-    }
+    if (this.data.accessesReady) {
+      const markers = this.data.accesses.map(access => <AccessMarker key={access._id} access={access} />);
 
-    return (
-      <div id="map-container">
-        {children}
-      </div>
-    )
+      return (
+        <MapboxLoader accessToken={MAPBOX_ACCESS_TOKEN} gl={true} plugins={['label']} >
+          <Map mapId={MAPBOX_MAP_ID} options={this._mapOptions()} >
+            {markers}
+          </Map>
+        </MapboxLoader>
+      )
+    } else {
+      return null;
+    }
   }
 });
