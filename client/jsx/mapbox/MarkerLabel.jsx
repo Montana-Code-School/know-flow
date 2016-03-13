@@ -3,7 +3,8 @@
 Globals.MarkerLabel = React.createClass({
 
   contextTypes: {
-    marker: React.PropTypes.object.isRequired
+    marker: React.PropTypes.object.isRequired,
+    map: React.PropTypes.object.isRequired
   },
 
   propTypes: {
@@ -12,6 +13,14 @@ Globals.MarkerLabel = React.createClass({
     offsetY: React.PropTypes.number,
     className: React.PropTypes.string,
     children: React.PropTypes.node
+  },
+
+  getDefaultProps() {
+    return {
+      noHide: false,
+      offsetX: 12,
+      offsetY: -15
+    }
   },
 
   componentWillMount() {
@@ -23,25 +32,19 @@ Globals.MarkerLabel = React.createClass({
   },
 
   _create() {
-    const label = new L.Label();
-    this.context.marker.bindLabel(label, {
-      noHide: this.props.noHide,
+    this.context.marker.bindLabel('', {
       offset: [this.props.offsetX, this.props.offsetY],
       className: this.props.className
     });
-    if (this.props.noHide) {
-      this.context.marker.showLabel();
-    }
-    this.setState({label});
   },
 
   _destroy() {
     this.context.marker.unbindLabel();
-    this.context.map.removeLayer(this.state.label);
   },
 
   render() {
-    this.state.label.setContent(React.renderToString(this.props.children));
+    this.context.marker.setLabelNoHide(this.props.noHide);
+    this.context.marker.updateLabelContent(React.renderToString(this.props.children));
     return null;
   }
 });

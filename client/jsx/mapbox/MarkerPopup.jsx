@@ -3,7 +3,8 @@
 Globals.MarkerPopup = React.createClass({
 
   contextTypes: {
-    marker: React.PropTypes.object.isRequired
+    marker: React.PropTypes.object.isRequired,
+    map: React.PropTypes.object.isRequired
   },
 
   propTypes: {

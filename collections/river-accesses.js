@@ -29,6 +29,10 @@ Globals.RiverAccess = Astro.Class({
     takeOut: {
       type: 'boolean',
       simpleValidator: 'required,boolean'
+    },
+    riverMile: {
+      type: 'number',
+      simpleValidator: 'number'
     }
   }
 });

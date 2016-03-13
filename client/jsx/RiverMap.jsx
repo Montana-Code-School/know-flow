@@ -1,7 +1,7 @@
 'use strict';
 
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamNoZXJvc2tlIiwiYSI6ImNpbG1rcTh5aTY4OWV0c2twNjRxNXlpcXEifQ.w4AILHfUs8_KCXQK8cxQSA#11/46.65179699999922/-114.05426000000021/0';
-const MAPBOX_MAP_ID = 'jcheroske.pceh4a5i';
+const MAPBOX_MAP_ID = 'jcheroske.fcbca93a';
 
 Globals.RiverMap = React.createClass({
   mixins: [ReactMeteorData],
@@ -40,7 +40,7 @@ Globals.RiverMap = React.createClass({
 
   render() {
     if (this.data.accessesReady) {
-      const markers = 
+      const markers =
         this.data.accesses.map(access => <AccessMarker key={access._id} access={access} onClick={this.props.accessSelected} />);
 
       return (

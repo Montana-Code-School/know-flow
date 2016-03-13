@@ -22,16 +22,20 @@ Globals.AccessMarker = React.createClass({
 
     return (
       <Marker latlng={[this.props.access.lat, this.props.access.lng]} onClick={this.handleClick}>
-          <MarkerIcon url={iconUrl} height={35} width={35} />
+        <MarkerIcon url={iconUrl} height={35} width={35} />
 
-          <MarkerPopup options={{className: 'access-popup'}}>
-            <ul>
-              <li>{this.props.access.name}</li>
-              <li>Put-in: {'' + this.props.access.putIn}</li>
-              <li>Take-out: {'' + this.props.access.takeOut}</li>
-              <li>{this.state.currentIcon}</li>
-            </ul>
-          </MarkerPopup>
+        <MarkerLabel offsetX={20} offsetY={0} noHide={true} >
+          <div>{this.props.access.name}</div>
+        </MarkerLabel>
+        å
+        <MarkerPopup options={{className: 'access-popup'}}>
+          <ul>
+            <li>{this.props.access.name}</li>
+            <li>Put-in: {'' + this.props.access.putIn}</li>
+            <li>Take-out: {'' + this.props.access.takeOut}</li>
+            <li>{this.state.currentIcon}</li>
+          </ul>
+        </MarkerPopup>
       </Marker>
     )
   }

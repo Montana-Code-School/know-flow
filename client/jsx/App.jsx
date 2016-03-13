@@ -19,7 +19,6 @@ Globals.App = React.createClass({
   },
 
   accessSelected(access) {
-    console.log(access);
     this.setState({
       showHeaderDropdown: true
     });

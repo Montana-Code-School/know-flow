@@ -10,23 +10,14 @@ if (Rivers.find().count() === 0) {
 
 if (RiverAccesses.find().count() === 0) {
   new RiverAccess({
-    _id: '1',
-    riverId: '1',
-    name: 'WW White Memorial',
-    lat: 45.921771,
-    lng: -114.141797,
-    putIn: true,
-    takeOut: false
-  }).save();
-
-  new RiverAccess({
     _id: '2',
     riverId: '1',
     name: 'Hannon Memorial',
-    lat: 46.014901,
-    lng: -114.163852,
+    lat: 45.973509,
+    lng: -114.141429,
     putIn: true,
-    takeOut: true
+    takeOut: false,
+    riverMile: 82
   }).save();
 
   new RiverAccess({
@@ -36,7 +27,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.014901,
     lng: -114.163852,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 78
   }).save();
 
   new RiverAccess({
@@ -46,7 +38,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.092454,
     lng: -114.174999,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 72
   }).save();
 
   new RiverAccess({
@@ -56,7 +49,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.199000,
     lng: -114.168430,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 62
   }).save();
 
   new RiverAccess({
@@ -66,7 +60,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.247190,
     lng: -114.177350,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 57
   }).save();
 
   new RiverAccess({
@@ -76,7 +71,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.312819,
     lng: -114.145651,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 52
   }).save();
 
   new RiverAccess({
@@ -86,7 +82,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.370494,
     lng: -114.139643,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 47
   }).save();
 
   new RiverAccess({
@@ -96,7 +93,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.443837,
     lng: -114.123483,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 41
   }).save();
 
   new RiverAccess({
@@ -106,7 +104,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.574512,
     lng: -114.090337,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 30
   }).save();
 
   new RiverAccess({
@@ -116,7 +115,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.585088,
     lng: -114.066056,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 28
   }).save();
 
   new RiverAccess({
@@ -126,7 +126,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.632353,
     lng: -114.050986,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 23
   }).save();
 
   new RiverAccess({
@@ -136,7 +137,8 @@ if (RiverAccesses.find().count() === 0) {
     lat: 46.661010,
     lng: -114.051362,
     putIn: true,
-    takeOut: true
+    takeOut: true,
+    riverMile: 21
   }).save();
 }
 
