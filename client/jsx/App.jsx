@@ -7,9 +7,9 @@ Globals.App = React.createClass({
     return {
       selectedAccesses: []
     }
-  }, 
+  },
 
-  getMeteorData: function() { //no freakin crud api you just spoke to the server
+  getMeteorData: function () { //no freakin crud api you just spoke to the server
     const river = Rivers.findOne('1');
 
     return {
@@ -53,22 +53,13 @@ Globals.App = React.createClass({
 
   render() {
     if (this.data.riverReady) {
-      const headerDropdown = this.state.showHeaderDropdown ? <HeaderDropdown /> : null;
-      return(
-      <div className="wrapper full-width-and-height">     
-        <div className="row">
-          <div className="col s12"><Navbar /></div>
+      return (
+        <div id="wrapper">
+          <Navbar />
+          <RiverMap river={ this.data.river } selectedAccesses={this.state.selectedAccesses}
+                    accessClickHandler={this.accessClickHandler}/>
         </div>
-
-        <div className="row">
-          <div className="col s12">{ this.props.headerDropdown}</div>
-        </div>
-
-        <div className="row full-width-and-height">
-          <div className="col s12 full-width-and-height"><RiverMap river={ this.data.river } selectedAccesses={this.state.selectedAccesses} accessClickHandler={this.accessClickHandler} /></div>
-          <RiverToast selectedAccesses={this.state.selectedAccesses}/>
-        </div>
-      </div>)
+      )
     } else {
       return null;
     }
