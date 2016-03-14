@@ -1,7 +1,5 @@
 'use strict';
 
-Globals.RiverAccesses = new Mongo.Collection('river-accesses');
-
 Globals.RiverAccess = Astro.Class({
   name: 'RiverAccess',
   collection: RiverAccesses,
@@ -21,14 +19,6 @@ Globals.RiverAccess = Astro.Class({
     lng: {
       type: 'number',
       simpleValidator: 'required,number'
-    },
-    putIn: {
-      type: 'boolean',
-      simpleValidator: 'required,boolean'
-    },
-    takeOut: {
-      type: 'boolean',
-      simpleValidator: 'required,boolean'
     },
     riverMile: {
       type: 'number',

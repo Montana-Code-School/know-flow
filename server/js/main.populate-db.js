@@ -15,8 +15,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Hannon Memorial',
     lat: 45.973509,
     lng: -114.141429,
-    putIn: true,
-    takeOut: false,
     riverMile: 82
   }).save();
 
@@ -26,8 +24,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Darby Bridge',
     lat: 46.014901,
     lng: -114.163852,
-    putIn: true,
-    takeOut: true,
     riverMile: 78
   }).save();
 
@@ -37,8 +33,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Wally Crawford',
     lat: 46.092454,
     lng: -114.174999,
-    putIn: true,
-    takeOut: true,
     riverMile: 72
   }).save();
 
@@ -48,8 +42,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Angler\'s Roost',
     lat: 46.199000,
     lng: -114.168430,
-    putIn: true,
-    takeOut: true,
     riverMile: 62
   }).save();
 
@@ -59,8 +51,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Demmons',
     lat: 46.247190,
     lng: -114.177350,
-    putIn: true,
-    takeOut: true,
     riverMile: 57
   }).save();
 
@@ -70,8 +60,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Woodside Bridge',
     lat: 46.312819,
     lng: -114.145651,
-    putIn: true,
-    takeOut: true,
     riverMile: 52
   }).save();
 
@@ -81,8 +69,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Tucker Crossing',
     lat: 46.370494,
     lng: -114.139643,
-    putIn: true,
-    takeOut: true,
     riverMile: 47
   }).save();
 
@@ -92,8 +78,6 @@ if (RiverAccesses.find().count() === 0) {
     name: '16 Bell Crossing E',
     lat: 46.443837,
     lng: -114.123483,
-    putIn: true,
-    takeOut: true,
     riverMile: 41
   }).save();
 
@@ -103,8 +87,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Bass Creek',
     lat: 46.574512,
     lng: -114.090337,
-    putIn: true,
-    takeOut: true,
     riverMile: 30
   }).save();
 
@@ -114,8 +96,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Poker Joe',
     lat: 46.585088,
     lng: -114.066056,
-    putIn: true,
-    takeOut: true,
     riverMile: 28
   }).save();
 
@@ -125,8 +105,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Florence Bridge',
     lat: 46.632353,
     lng: -114.050986,
-    putIn: true,
-    takeOut: true,
     riverMile: 23
   }).save();
 
@@ -136,8 +114,6 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Chief Looking Glass',
     lat: 46.661010,
     lng: -114.051362,
-    putIn: true,
-    takeOut: true,
     riverMile: 21
   }).save();
 }

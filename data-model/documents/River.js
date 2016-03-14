@@ -1,7 +1,5 @@
 'use strict';
 
-Globals.Rivers = new Mongo.Collection('rivers');
-
 Globals.River = Astro.Class({
   name: 'River',
   collection: Rivers,
@@ -36,8 +34,3 @@ Globals.River = Astro.Class({
     }
   }
 });
-
-if (Meteor.isServer) {
-  Meteor.publish('rivers', () => Rivers.find());
-}
-

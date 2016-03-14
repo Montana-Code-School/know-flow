@@ -3,40 +3,51 @@
 Globals.AccessMarker = React.createClass({
 
   propTypes: {
-   access: React.PropTypes.object.isRequired,
-   onClick: React.PropTypes.func.isRequired
-  },
-
-  getInitialState() {
-    return {
-      currentIcon: 'blue'
-    }
-  },
-
-  handleClick(event) {
-    this.props.onClick(this.props.access);
+    access: React.PropTypes.object.isRequired,
+    mode: React.PropTypes.string.isRequired,
+    onClick: React.PropTypes.func.isRequired
   },
 
   render() {
-    const iconUrl = '/icons/wp-' + this.state.currentIcon + '.png';
+    const {access, onClick} = this.props;
+
+    const wrappedHandler = (event) => {
+      event.data = access;
+      onClick(event)
+    };
 
     return (
-      <Marker latlng={[this.props.access.lat, this.props.access.lng]} onClick={this.handleClick}>
-        <MarkerIcon url={iconUrl} height={35} width={35} />
+      <Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
+        <MarkerIcon url={this._modeToImgUrl()} height={35} width={35}/>
 
-        <MarkerLabel offsetX={20} offsetY={0} noHide={true} >
+        <MarkerLabel offsetX={20} offsetY={0} noHide={true}>
           <div>{this.props.access.name}</div>
         </MarkerLabel>
-        å
-        <MarkerPopup options={{className: 'access-popup'}}>
-          <ul>
-            <li>{this.props.access.name}</li>
-            <li>Put-in: {'' + this.props.access.putIn}</li>
-            <li>Take-out: {'' + this.props.access.takeOut}</li>
-            <li>{this.state.currentIcon}</li>
-          </ul>
-        </MarkerPopup>
       </Marker>
     )
+  },
+
+  _modeToImgUrl() {
+    let iconColor;
+    switch (this.props.mode) {
+      case 'ready':
+        iconColor = 'blue';
+        break;
+      case 'selected':
+        iconColor = 'yellow';
+        break;
+      case 'putIn':
+        iconColor = 'green';
+        break;
+      case 'takeOut':
+        iconColor = 'red';
+        break;
+      case 'cancel':
+        iconColor = 'grey';
+        break;
+      default:
+        throw new Error('Unknown AccessMarker mode');
+    }
+    return '/icons/wp-' + iconColor + '.png';
   }
 });

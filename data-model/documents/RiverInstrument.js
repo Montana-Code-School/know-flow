@@ -1,7 +1,5 @@
 'use strict';
 
-Globals.RiverInstruments = new Mongo.Collection('river-instruments');
-
 Globals.RiverInstrument = Astro.Class({
   name: 'RiverInstrument',
   collection: RiverInstruments,
