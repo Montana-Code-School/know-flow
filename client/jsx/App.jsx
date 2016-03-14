@@ -58,6 +58,7 @@ Globals.App = React.createClass({
           <Navbar />
           <RiverMap river={ this.data.river } selectedAccesses={this.state.selectedAccesses}
                     accessClickHandler={this.accessClickHandler}/>
+          <RiverSnackbar selectedAccesses={this.state.selectedAccesses}/>
         </div>
       )
     } else {
