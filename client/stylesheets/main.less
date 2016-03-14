@@ -1,25 +1,18 @@
 @brand-1: #00897b; // dark teal
 
 #body {
-  height: 100%;
-
   #wrapper {
     height: 100vh;
     display: flex;
     flex-direction: column;
 
-    #navbar {
+    .navbar {
       background-color: @brand-1;
-      min-height: 70px;
-      line-height: 70px;
-
-      .brand-logo {
-        font-size: 50px;
-      }
     }
 
     #map-container {
       flex-grow: 1;
+      overflow: hidden;
     }
   }
 }

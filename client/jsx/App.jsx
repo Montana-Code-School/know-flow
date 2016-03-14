@@ -1,5 +1,7 @@
 'use strict';
 
+const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamNoZXJvc2tlIiwiYSI6ImNpbG1rcTh5aTY4OWV0c2twNjRxNXlpcXEifQ.w4AILHfUs8_KCXQK8cxQSA#11/46.65179699999922/-114.05426000000021/0';
+
 Globals.App = React.createClass({
   mixins: [ReactMeteorData],
 
@@ -54,11 +56,13 @@ Globals.App = React.createClass({
   render() {
     if (this.data.riverReady) {
       return (
-        <div id="wrapper">
-          <Navbar />
-          <RiverMap river={ this.data.river } selectedAccesses={this.state.selectedAccesses}
-                    accessClickHandler={this.accessClickHandler}/>
-        </div>
+        <MapboxLoader accessToken={MAPBOX_ACCESS_TOKEN} gl={true} plugins={['label']} >
+          <div id="wrapper">
+            <Navbar />
+            <FloatEstimateMap river={ this.data.river } selectedAccesses={this.state.selectedAccesses}
+                      accessClickHandler={this.accessClickHandler}/>
+          </div>
+        </MapboxLoader>
       )
     } else {
       return null;

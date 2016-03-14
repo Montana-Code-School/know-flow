@@ -3,12 +3,14 @@
 Globals.Navbar = React.createClass({
 
   render() {
+    const {AppBar} = MUI;
+
     return (
-      <nav id="navbar">
-        <div className="nav-wrapper">
-          <a href="#" className="brand-logo center">KnowFlow</a>
-        </div>
-      </nav>
+      <AppBar
+        className="navbar"
+        title="KnowFlow"
+        iconClassNameRight="muidocs-icon-navigation-expand-more"
+      />
     )
   }
 });
