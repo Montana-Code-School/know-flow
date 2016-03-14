@@ -9,6 +9,7 @@ Globals.MarkerLabel = React.createClass({
 
   propTypes: {
     noHide: React.PropTypes.bool,
+    direction: React.PropTypes.string,
     offsetX: React.PropTypes.number,
     offsetY: React.PropTypes.number,
     className: React.PropTypes.string,
@@ -18,6 +19,7 @@ Globals.MarkerLabel = React.createClass({
   getDefaultProps() {
     return {
       noHide: false,
+      direction: 'right',
       offsetX: 12,
       offsetY: -15
     }
@@ -32,7 +34,8 @@ Globals.MarkerLabel = React.createClass({
   },
 
   _create() {
-    this.context.marker.bindLabel('', {
+    this.context.marker.bindLabel(React.renderToString(this.props.children), {
+      direction: this.props.direction,
       offset: [this.props.offsetX, this.props.offsetY],
       className: this.props.className
     });

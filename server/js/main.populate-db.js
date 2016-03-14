@@ -96,7 +96,8 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Poker Joe',
     lat: 46.585088,
     lng: -114.066056,
-    riverMile: 28
+    riverMile: 28,
+    labelSettings: new LabelSettings({offsetY: -10})
   }).save();
 
   new RiverAccess({

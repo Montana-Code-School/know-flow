@@ -3,14 +3,15 @@
 Globals.LabelSettings = Astro.Class({
   name: 'LabelSettings',
   fields: {
-    position: {
+    direction: {
       type: 'string',
+      default: 'right',
       simpleValidator: 'required,string',
       validator: Validators.choice(['left', 'right'])
     },
     offsetX: {
       type: 'number',
-      default: 0,
+      default: 20,
       simpleValidator: 'required,number'
     },
     offsetY: {

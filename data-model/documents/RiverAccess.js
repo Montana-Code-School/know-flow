@@ -23,6 +23,11 @@ Globals.RiverAccess = Astro.Class({
     riverMile: {
       type: 'number',
       simpleValidator: 'number'
+    },
+    labelSettings: {
+      type: 'object',
+      nested: 'LabelSettings',
+      default: () => new LabelSettings()
     }
   }
 });

@@ -20,7 +20,7 @@ Globals.AccessMarker = React.createClass({
       <Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
         <MarkerIcon url={this._modeToImgUrl()} height={35} width={35}/>
 
-        <MarkerLabel offsetX={20} offsetY={0} noHide={true}>
+        <MarkerLabel direction={access.labelSettings.direction} offsetX={access.labelSettings.offsetX} offsetY={access.labelSettings.offsetY} noHide={true}>
           <div>{this.props.access.name}</div>
         </MarkerLabel>
       </Marker>
