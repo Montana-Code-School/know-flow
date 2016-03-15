@@ -1,5 +1,8 @@
 'use strict';
 
+/*
+ *** Rivers ***
+ */
 if (Rivers.find().count() === 0) {
   new River({
     _id: '1',
@@ -8,6 +11,9 @@ if (Rivers.find().count() === 0) {
   }).save();
 }
 
+/*
+ *** River Accesses ***
+ */
 if (RiverAccesses.find().count() === 0) {
   new RiverAccess({
     _id: '2',
@@ -119,6 +125,9 @@ if (RiverAccesses.find().count() === 0) {
   }).save();
 }
 
+/*
+ *** River Instruments ***
+ */
 if (RiverInstruments.find().count() === 0) {
   new RiverInstrument({
     _id: '1',
