@@ -11,6 +11,10 @@ Globals.App = React.createClass({
     }
   },
 
+  componentWillMount() {
+    injectTapEventPlugin();
+  },
+
   getMeteorData: function () { //no freakin crud api you just spoke to the server
     const river = Rivers.findOne('1');
 

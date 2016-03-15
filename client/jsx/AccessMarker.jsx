@@ -38,8 +38,6 @@ Globals.AccessMarker = React.createClass({
     const icon = SvgIcons.MapsPlace // ICONS[mode];
     const iconColor = COLORS[mode];
 
-    console.log(icon);
-
     return (
       <Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
         <MarkerDivIcon iconSize={[48,48]} iconAnchor={[24,42]}>{this._iconForMode()}</MarkerDivIcon>
