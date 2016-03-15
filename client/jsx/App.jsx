@@ -66,6 +66,7 @@ Globals.App = React.createClass({
             <FloatEstimateMap river={ this.data.river } selectedAccesses={this.state.selectedAccesses}
                       accessClickHandler={this.accessClickHandler}/>
             <FloatEstimateSnackbar selectedAccesses={this.state.selectedAccesses}/>
+            <Accounts.ui.Dialogs />
           </div>
         </MapboxLoader>
       )

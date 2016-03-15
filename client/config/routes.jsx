@@ -1,19 +1,5 @@
 'use strict';
 
-FlowRouter.route('/john', {
-  name: 'johnLayout',
-  action() {
-    ReactLayout.render(JohnLayout);
-  }
-});
-
-FlowRouter.route('/jay', {
-  name: 'jayLayout',
-  action() {
-    ReactLayout.render(JayLayout);
-  }
-});
-
 FlowRouter.route('/teague', {
   name: 'teagueLayout',
   action() {
@@ -25,6 +11,13 @@ FlowRouter.route('/', {
   name: 'App',
   action() {
     ReactLayout.render(App);
+  }
+});
+
+FlowRouter.route('/login', {
+  name: 'Login',
+  action() {
+    ReactLayout.render(Login);
   }
 });
 

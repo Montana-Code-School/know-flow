@@ -1,13 +1,27 @@
 'use strict';
 
 Globals.Navbar = React.createClass({
+  mixins: [ReactMeteorData],
+
+  getMeteorData() {
+    console.log('in getMeteorData');
+
+    return {
+      loggedIn: Meteor.userId() != null
+    }
+  },
+
+  handleLogout() {
+    Meteor.logout();
+  },
 
   render() {
     const {AppBar, IconMenu, MenuItem, IconButton} = MUI;
     const {NavigationMoreVert} = MUI.Libs.SvgIcons;
-    const loginButton =  Meteor.userId() ?
-                         <MenuItem primaryText="Logout" onClick={Meteor.logout} /> :
-                         <MenuItem primaryText="Login" linkButton={true} href="/login" style={{margin: -8, textAlign: 'center'}}/>;
+    const loginButton =  this.data.loggedIn ?
+      <MenuItem primaryText="Logout" onClick={this.handleLogout} style={{margin: -8, textAlign: 'center'}} /> :
+      <Accounts.ui.LoginServices />;
+    
     return (
       <AppBar
         className="navbar"
