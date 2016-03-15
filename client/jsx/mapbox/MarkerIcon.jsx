@@ -7,17 +7,13 @@ Globals.MarkerIcon = React.createClass({
   },
 
   propTypes: {
-    url: React.PropTypes.string.isRequired,
-    height: React.PropTypes.number,
-    width: React.PropTypes.number
+    iconUrl: React.PropTypes.string.isRequired,
+    iconSize: React.PropTypes.arrayOf(React.PropTypes.number)
   },
 
   render() {
-    const icon = L.icon({
-      iconUrl: this.props.url,
-      iconSize: [this.props.height, this.props.width]
-    });
-
+    const {iconUrl, iconSize} = this.props;
+    const icon = L.icon({iconUrl, iconSize});
     this.context.marker.setIcon(icon);
     return null;
   }

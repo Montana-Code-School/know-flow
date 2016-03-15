@@ -9,15 +9,11 @@ Globals.LabelSettings = Astro.Class({
       simpleValidator: 'required,string',
       validator: Validators.choice(['left', 'right'])
     },
-    offsetX: {
-      type: 'number',
-      default: 20,
-      simpleValidator: 'required,number'
-    },
-    offsetY: {
-      type: 'number',
-      default: 0,
-      simpleValidator: 'required,number'
-   }
+    offset: {
+      type: 'array',
+      nested: 'number',
+      default: () => [12,-12],
+      simpleValidator: 'required,array'
+    }
   }
 });

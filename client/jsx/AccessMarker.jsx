@@ -1,5 +1,15 @@
 'use strict';
 
+const {Colors} = MUI.Styles;
+
+const COLORS = {
+  ready: Colors.blue500,
+  selected: Colors.orange500,
+  putIn: Colors.green500,
+  takeOut: Colors.red500,
+  cancel: Colors.blueGrey500
+};
+
 Globals.AccessMarker = React.createClass({
 
   propTypes: {
@@ -9,7 +19,8 @@ Globals.AccessMarker = React.createClass({
   },
 
   render() {
-    const {access, onClick} = this.props;
+    const {SvgIcons} = MUI.Libs;
+    const {access, mode, onClick} = this.props;
 
     const wrappedHandler = (event) => {
       event.data = access;
@@ -18,36 +29,12 @@ Globals.AccessMarker = React.createClass({
 
     return (
       <Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
-        <MarkerIcon url={this._modeToImgUrl()} height={35} width={35}/>
+        <MarkerDivIcon iconSize={[48,48]} iconAnchor={[24,42]}><SvgIcons.MapsPlace color={COLORS[mode]} style={{height: 48, width: 48}} /></MarkerDivIcon>
 
-        <MarkerLabel direction={access.labelSettings.direction} offsetX={access.labelSettings.offsetX} offsetY={access.labelSettings.offsetY} noHide={true}>
+        <MarkerLabel direction={access.labelSettings.direction} offset={access.labelSettings.offset} noHide={true}>
           <div>{this.props.access.name}</div>
         </MarkerLabel>
       </Marker>
     )
-  },
-
-  _modeToImgUrl() {
-    let iconColor;
-    switch (this.props.mode) {
-      case 'ready':
-        iconColor = 'blue';
-        break;
-      case 'selected':
-        iconColor = 'yellow';
-        break;
-      case 'putIn':
-        iconColor = 'green';
-        break;
-      case 'takeOut':
-        iconColor = 'red';
-        break;
-      case 'cancel':
-        iconColor = 'grey';
-        break;
-      default:
-        throw new Error('Unknown AccessMarker mode');
-    }
-    return '/icons/wp-' + iconColor + '.png';
   }
 });

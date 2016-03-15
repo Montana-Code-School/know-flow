@@ -87,7 +87,8 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Bass Creek',
     lat: 46.574512,
     lng: -114.090337,
-    riverMile: 30
+    riverMile: 30,
+    labelSettings: new LabelSettings({direction: 'left'})
   }).save();
 
   new RiverAccess({
@@ -96,8 +97,7 @@ if (RiverAccesses.find().count() === 0) {
     name: 'Poker Joe',
     lat: 46.585088,
     lng: -114.066056,
-    riverMile: 28,
-    labelSettings: new LabelSettings({offsetY: -10})
+    riverMile: 28
   }).save();
 
   new RiverAccess({
