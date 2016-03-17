@@ -1,43 +1,30 @@
 'use strict';
 
-Globals.Navbar = React.createClass({
-  mixins: [ReactMeteorData],
+const {FlatButton, AppBar} = MUI;
 
-  getMeteorData() {
-    console.log('in getMeteorData');
+Globals.Navbar = function(props, context) {
 
-    return {
-      loggedIn: Meteor.userId() != null
+  const {servicesReady, loggedIn, username, logout, loginWithFacebook} = context.UserAuthentication;
+
+  let widgets = null;
+  if (servicesReady) {
+    if (loggedIn) {
+      widgets = <FlatButton onTouchTap={logout} style={{marginRight: '5px'}}>Logout {username}</FlatButton>
+    } else {
+      widgets = <FlatButton onTouchTap={loginWithFacebook}  style={{marginRight: '5px'}}>Login with Facebook</FlatButton>
     }
-  },
-
-  handleLogout() {
-    Meteor.logout();
-  },
-
-  render() {
-    const {AppBar, IconMenu, MenuItem, IconButton} = MUI;
-    const {NavigationMoreVert} = MUI.Libs.SvgIcons;
-    const loginButton =  this.data.loggedIn ?
-      <MenuItem primaryText="Logout" onClick={this.handleLogout} style={{margin: -8, textAlign: 'center'}} /> :
-      <Accounts.ui.LoginServices />;
-    
-    return (
-      <AppBar
-        className="navbar"
-        title="KnowFlow"
-        iconElementRight={
-          <IconMenu
-            iconButtonElement={
-              <IconButton><NavigationMoreVert /></IconButton>
-            }
-            targetOrigin={{horizontal: 'right', vertical: 'top'}}
-            anchorOrigin={{horizontal: 'right', vertical: 'top'}} 
-          >
-            {loginButton}
-          </IconMenu>
-        }
-      />      
-    )
   }
-});
+
+  return (
+    <AppBar
+      className="navbar"
+      title="KnowFlow"
+      zDepth={3}
+      iconElementRight={widgets}
+    />
+  )
+};
+
+Navbar.contextTypes = {
+  UserAuthentication: React.PropTypes.object.isRequired
+};

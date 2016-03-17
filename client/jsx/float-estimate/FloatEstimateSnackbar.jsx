@@ -1,9 +1,6 @@
 'use strict';
 
-var {
-  RaisedButton,
-  Snackbar
-  } = MUI;
+const {RaisedButton, Snackbar} = MUI;
 
 Globals.FloatEstimateSnackbar = React.createClass({
 
@@ -12,7 +9,7 @@ Globals.FloatEstimateSnackbar = React.createClass({
   },
 
   render: function () {
-    const selectedCount = this.props.selectedAccesses.length
+    const selectedCount = this.props.selectedAccesses.length;
 
     let message = '';
     if (selectedCount === 0) {

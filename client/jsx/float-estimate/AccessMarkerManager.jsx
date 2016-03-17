@@ -2,14 +2,13 @@
 
 Globals.AccessMarkerManager = React.createClass({
   propTypes: {
-    accesses: React.PropTypes.array.isRequired,
-    selectedAccesses: React.PropTypes.array.isRequired,
+    accesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     accessClickHandler: React.PropTypes.func.isRequired
   },
 
   render() {
-    const selectedAccesses = this.props.selectedAccesses;
-    const accesses = this.props.accesses;
+    const {accesses, selectedAccesses} = this.props;
 
     const modes = accesses.map(access => {
       if (selectedAccesses.length === 0) {
@@ -38,6 +37,6 @@ Globals.AccessMarkerManager = React.createClass({
     });
 
     const markers = accesses.map((a, i) => <AccessMarker key={a._id} access={a} mode={modes[i]} onClick={this.props.accessClickHandler} /> );
-    return <div>{markers}</div>;
+    return <div id="access-marker-manager">{markers}</div>;
   }
 });
