@@ -24,7 +24,7 @@ Globals.FloatEstimateSnackbar = React.createClass({
       <div>
         <Snackbar
           open={true}
-          message={ message }
+          message={ <span style={{fontSize: '18px'}}>{message}</span> }
           bodyStyle={{'textAlign': 'center'}}
           onRequestClose={ () => {} }
         />

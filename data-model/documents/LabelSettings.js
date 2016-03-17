@@ -12,7 +12,7 @@ Globals.LabelSettings = Astro.Class({
     offset: {
       type: 'array',
       nested: 'number',
-      default: () => [12,-12],
+      default: () => [20,-12],
       simpleValidator: 'required,array'
     }
   }
