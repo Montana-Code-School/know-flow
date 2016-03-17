@@ -56,7 +56,7 @@ Globals.FloatEstimateSnackbar = React.createClass({
           open={true}
           message={ <span style={{fontSize: '18px'}}>{message}</span> }
           action={actionMessage}
-          bodyStyle={{'textAlign': 'center'}}
+          bodyStyle={{'textAlign': 'center', fontFamily: "'Roboto', sans-serif"}}
           onActionTouchTap={this.handleActionTouchTap}
           onRequestClose={ () => {} } />
         <RecordTripDialog dialogOpen={this.state.dialogOpen} handleDialogClose={this.handleDialogClose}/>

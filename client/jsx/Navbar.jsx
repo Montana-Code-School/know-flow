@@ -19,8 +19,9 @@ Globals.Navbar = function(props, context) {
     <AppBar
       className="navbar"
       title="KnowFlow"
-      zDepth={3}
+      zDepth={4}
       iconElementRight={widgets}
+      style={{position: 'fixed'}}
     />
   )
 };

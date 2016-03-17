@@ -1,10 +1,11 @@
 'use strict';
 
+const {Paper} = MUI;
 const {Colors} = MUI.Styles;
 const {SvgIcons} = MUI.Libs;
 
 const COLORS = {
-  ready: Colors.teal500,
+  ready: Colors.indigo500,
   selected: Colors.orange500,
   putIn: Colors.green500,
   takeOut: Colors.red500,
@@ -42,8 +43,8 @@ Globals.AccessMarker = React.createClass({
       <Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
         <MarkerDivIcon iconSize={[48,48]} iconAnchor={[24,42]}>{this._iconForMode()}</MarkerDivIcon>
 
-        <MarkerLabel direction={access.labelSettings.direction} offset={access.labelSettings.offset} noHide={true}>
-          <div>{this.props.access.name}</div>
+        <MarkerLabel className={'access-marker-label'} direction={access.labelSettings.direction} offset={access.labelSettings.offset} noHide={true}>
+          <Paper zDepth={3} style={{fontSize: '14px', padding: '4px', backgroundColor: Colors.amber50}}>{this.props.access.name}</Paper>
         </MarkerLabel>
       </Marker>
     )
@@ -61,7 +62,7 @@ Globals.AccessMarker = React.createClass({
     } else if (mode === 'takeOut') {
       return <SvgIcons.MapsBeenhere color={COLORS[mode]} style={{height: 48, width: 48}} />
     } else if (mode === 'cancel') {
-      return <SvgIcons.MapsPlace color={COLORS[mode]} style={{height: 48, width: 48}} />
+      return <SvgIcons.MapsPlace zDepth={3} color={COLORS[mode]} style={{height: 48, width: 48}} />
     } else {
       throw new Error('Unknown AccessMarker mode: ' + mode);
     }
