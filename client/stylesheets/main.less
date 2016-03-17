@@ -1,15 +1,16 @@
 @brand-1: #00897b; // dark teal
 
 #body {
-  //#wrapper {
-  //  height: 100vh;
-  //  display: flex;
-  //  flex-direction: column;
+  #map-container {
+    height: 100vh;
+  }
 
-    #map-container {
-      height: 100vh;
-    //  flex-grow: 1;
-    //  overflow: hidden;
+  .leaflet-label {
+    border: 0;
+    background: none;
+
+    &:before, &:after {
+      content: none;
     }
- // }
+  }
 }
