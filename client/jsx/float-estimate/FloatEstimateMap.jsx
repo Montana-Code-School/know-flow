@@ -15,7 +15,7 @@ Globals.FloatEstimateMap = React.createClass({
 
     return {
       center: [46.651797, - 114.054260],
-      maxBounds: [[46.714841, - 113.998347], [45.889571, - 114.219819]],
+      maxBounds: [[46.76, - 113.998347], [45.9, - 114.219819]],
       zoom: ZOOM_LEVEL,
       minZoom: ZOOM_LEVEL,
       maxZoom: ZOOM_LEVEL,

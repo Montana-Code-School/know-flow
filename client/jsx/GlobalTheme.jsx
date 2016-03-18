@@ -28,14 +28,16 @@ Globals.GlobalTheme = React.createClass({
   },
 
   componentWillMount() {
-    const modifiedTheme = this.state.muiTheme;
-
-    modifiedTheme.appBar.color = Colors.blue500;
-    console.log(modifiedTheme);
-
+    const theme = this.state.muiTheme;
+    this.configureTheme(theme);
     this.setState({
-      muiTheme: modifiedTheme
+      muiTheme: theme
     });
+  },
+
+  configureTheme(t) {
+    t.appBar.color = Colors.blue500;
+    t.paper.backgroundColor = Colors.amber50; // Not working currently
   },
 
   render() {

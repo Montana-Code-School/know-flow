@@ -18,47 +18,53 @@ Globals.FloatEstimateSnackbar = React.createClass({
     }
   },
 
-  handleDialogClose: function(open) {
+  handleDialogClose: function() {
     this.setState({
       dialogOpen: false
     });
   },
 
-
-  handleActionTouchTap: function () {
-    const {loginWithFacebook, loggedIn} = this.context.UserAuthentication;
-    if (loggedIn) {
-      console.log("in handle action touch tap")
-      this.setState({dialogOpen: true});
-    } else {
-      loginWithFacebook();
-    }
+  handleDialogOpen() {
+    this.setState({
+      dialogOpen: true
+    });
   },
 
   render: function () {
     const selectedCount = this.props.selectedAccesses.length;
-    const {servicesReady, loggedIn} = this.context.UserAuthentication;
+    const {servicesReady, loggedIn, loginWithFacebook} = this.context.UserAuthentication;
 
     let message = '';
     if (selectedCount === 0) {
-      message = "Please select a waypoint."
+      message = 'Please select a waypoint.';
     } else if (selectedCount === 1) {
       message = "Please select another waypoint."
     } else if (selectedCount === 2) {
-      message = 'Estimated trip time: 2h 51m.'
+      message = 'Estimated trip time: Top secret';
     }
 
-    const actionMessage = servicesReady ? (loggedIn ? "Record Trip" : "Login to Record Trip") : null;
+    let action = null;
+    let actionTouchTap = null;
+    if (servicesReady) {
+      if (!loggedIn) {
+        action = 'Login to Record Trip';
+        actionTouchTap = loginWithFacebook
+      } else if (selectedCount === 2 && loggedIn) {
+        action = 'Record Trip';
+        actionTouchTap = this.handleDialogOpen
+      }
+    }
 
     return (
       <div>
         <Snackbar
           open={true}
           message={ <span style={{fontSize: '18px'}}>{message}</span> }
-          action={actionMessage}
+          action={action}
+          onActionTouchTap={actionTouchTap}
+          onRequestClose={ () => {} }
           bodyStyle={{'textAlign': 'center', fontFamily: "'Roboto', sans-serif"}}
-          onActionTouchTap={this.handleActionTouchTap}
-          onRequestClose={ () => {} } />
+        />
         <RecordTripDialog dialogOpen={this.state.dialogOpen} handleDialogClose={this.handleDialogClose}/>
       </div>
     );

@@ -10,7 +10,6 @@ Globals.RecordTripDialog = React.createClass({
   },
 
   render() {
-    console.log("in RecordTripDialog")
     const actions = [
       <FlatButton
         label="Ok"

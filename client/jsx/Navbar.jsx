@@ -4,6 +4,7 @@ const {FlatButton, AppBar} = MUI;
 
 Globals.Navbar = function(props, context) {
 
+  const {river} = props;
   const {servicesReady, loggedIn, username, logout, loginWithFacebook} = context.UserAuthentication;
 
   let widgets = null;
@@ -18,7 +19,7 @@ Globals.Navbar = function(props, context) {
   return (
     <AppBar
       className="navbar"
-      title="KnowFlow"
+      title={`KnowFlow: ${river.name}`}
       zDepth={4}
       iconElementRight={widgets}
       style={{position: 'fixed'}}

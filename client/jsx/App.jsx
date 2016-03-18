@@ -17,14 +17,16 @@ Globals.App = React.createClass({
   },
 
   render() {
-    if (this.data.riverReady) {
+    const {river, riverReady} = this.data;
+
+    if (riverReady) {
       return (
         <UserAuthenticationContext>
           <MapboxLoader accessToken={MAPBOX_ACCESS_TOKEN} gl={true} plugins={['label']} >
             <AppCanvas>
               <GlobalTheme>
-                <Navbar logoutUser={this.logoutUser} loginWithFacebook={this.loginWithFacebook} />
-                <FloatEstimatePane river={this.data.river}/>
+                <Navbar river={river} />
+                <FloatEstimatePane river={river}/>
               </GlobalTheme>
             </AppCanvas>
           </MapboxLoader>
