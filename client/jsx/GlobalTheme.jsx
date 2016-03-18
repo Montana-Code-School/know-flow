@@ -30,6 +30,7 @@ Globals.GlobalTheme = React.createClass({
   componentWillMount() {
     const theme = this.state.muiTheme;
     this.configureTheme(theme);
+    console.log(theme);
     this.setState({
       muiTheme: theme
     });

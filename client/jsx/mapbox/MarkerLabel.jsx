@@ -3,8 +3,7 @@
 Globals.MarkerLabel = React.createClass({
 
   contextTypes: {
-    marker: React.PropTypes.object.isRequired,
-    map: React.PropTypes.object.isRequired
+    marker: React.PropTypes.object.isRequired
   },
 
   propTypes: {
@@ -34,11 +33,9 @@ Globals.MarkerLabel = React.createClass({
   },
 
   _create() {
-    this.context.marker.bindLabel(React.renderToString(this.props.children), {
-      direction: this.props.direction,
-      offset: this.props.offset,
-      className: this.props.className
-    });
+    const {children, direction, offset, className} = this.props;
+
+    this.context.marker.bindLabel(React.renderToString(children), {direction, offset, className});
   },
 
   _destroy() {
@@ -46,8 +43,11 @@ Globals.MarkerLabel = React.createClass({
   },
 
   render() {
-    this.context.marker.setLabelNoHide(this.props.noHide);
-    this.context.marker.updateLabelContent(React.renderToString(this.props.children));
+    const {noHide, children} = this.props;
+    const {marker} = this.context;
+
+    marker.setLabelNoHide(noHide);
+    marker.updateLabelContent(React.renderToString(children));
     return null;
   }
 });

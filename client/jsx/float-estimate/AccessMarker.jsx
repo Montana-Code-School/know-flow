@@ -44,7 +44,7 @@ Globals.AccessMarker = React.createClass({
         <MarkerDivIcon iconSize={[48,48]} iconAnchor={[24,42]}>{this._iconForMode()}</MarkerDivIcon>
 
         <MarkerLabel className={'access-marker-label'} direction={access.labelSettings.direction} offset={access.labelSettings.offset} noHide={true}>
-          <Paper zDepth={3} style={{fontSize: '14px', padding: '4px', backgroundColor: Colors.amber50}}>{this.props.access.name}</Paper>
+          <Paper onClick={wrappedHandler} zDepth={3} style={{fontSize: '14px', padding: '4px', backgroundColor: Colors.amber50}}>{this.props.access.name}</Paper>
         </MarkerLabel>
       </Marker>
     )
