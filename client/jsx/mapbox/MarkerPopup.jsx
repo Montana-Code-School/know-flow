@@ -1,6 +1,6 @@
 'use strict';
 
-Globals.MarkerPopup = React.createClass({
+Globals.Mapbox.MarkerPopup = React.createClass({
 
   contextTypes: {
     marker: React.PropTypes.object.isRequired,

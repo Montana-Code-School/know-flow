@@ -1,6 +1,6 @@
 'use strict';
 
-Globals.AccessMarkerManager = React.createClass({
+Globals.FloatEstimate.AccessMarkerManager = React.createClass({
   propTypes: {
     accesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
     selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
@@ -36,7 +36,7 @@ Globals.AccessMarkerManager = React.createClass({
       }
     });
 
-    const markers = accesses.map((a, i) => <AccessMarker key={a._id} access={a} mode={modes[i]} onClick={this.props.accessClickHandler} /> );
+    const markers = accesses.map((a, i) => <FloatEstimate.AccessMarker key={a._id} access={a} mode={modes[i]} onClick={this.props.accessClickHandler} /> );
     return <div id="access-marker-manager">{markers}</div>;
   }
 });

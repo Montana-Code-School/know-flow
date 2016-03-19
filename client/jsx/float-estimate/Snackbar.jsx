@@ -1,8 +1,9 @@
 'use strict';
 
 const {Snackbar} = MUI;
+const {RecordTripDialog} = FloatEstimate;
 
-Globals.FloatEstimateSnackbar = React.createClass({
+Globals.FloatEstimate.Snackbar = React.createClass({
 
   contextTypes: {
     UserAuthentication: React.PropTypes.object
