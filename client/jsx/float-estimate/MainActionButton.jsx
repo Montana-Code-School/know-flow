@@ -1,7 +1,6 @@
 'use strict';
 
-const {FloatingActionButton} = MUI;
-const {SvgIcons} = MUI.Libs;
+const {FloatingActionButton, FontIcon} = MUI;
 
 
 Globals.FloatEstimate.MainActionButton = React.createClass({
@@ -15,8 +14,8 @@ Globals.FloatEstimate.MainActionButton = React.createClass({
 
   render() {
     return (
-      <FloatingActionButton disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: 0, right: 0, marginRight: '20px', marginBottom: '100px'}} >
-        <SvgIcons.AvFiberManualRecord />
+      <FloatingActionButton zDepth={0} disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: '150px', right: '75px'}} >
+        <FontIcon className={'material-icons'} >fiber_manual_record</FontIcon>
       </FloatingActionButton>
     )
   }
