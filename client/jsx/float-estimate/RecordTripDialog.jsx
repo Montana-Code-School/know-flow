@@ -13,25 +13,72 @@ Globals.RecordTripDialog = React.createClass({
     return{
       startTime: null,
       endTime: null,
-      idleTime: null
+      idleTime: 0
     }
   },
+
+  isEndTimeDisabled() {
+    return this.state.startTime == null || this.state.endTime == null;
+  },
+  
+  isSliderDisabled() {
+    return this.state.startTime == null || this.state.endTime == null;
+  },  
 
   isSaveDisabled() {
     return this.state.startTime == null || this.state.endTime == null;
   },
 
-  isSliderDisabled() {
-    return this.state.startTime == null || this.state.endTime == null;
+  getSliderStepValue() {
+    if(this.state.startTime && this.state.endTime){
+      return (10 / this.grossFloatTime());
+    } else {
+      return 0;
+    }
+  },
+
+  grossFloatTime() {
+    if (this.state.endTime && this.state.startTime) {
+      return (this.state.endTime.getTime() - this.state.startTime.getTime()) / 60000;
+    } else {
+      return null;
+    }
+  },
+
+  netFloatTime() {
+    if (this.grossFloatTime() && this.state.idleTime) {
+      return this.grossFloatTime() - this.state.idleTime;
+    } else if (this.grossFloatTime()) {
+      return this.grossFloatTime();
+    } else {
+      return 0;
+    }
+  },
+
+  displayFloatTime() {
+    return 'Total float time: ' + this.netFloatTime() / 60;
+  },
+
+  displayIdleTime() {
+    if(this.state.idleTime) {
+      return 'Idle time: ' + this.state.idleTime;
+    } else {
+      return 'Idle time: 0';
+    }
   },
 
   handleIdleTimeChange(_, value) {
-    this.state.endTime - this.state.startTime
+    console.log('slider value')
     console.log(value)
+    this.setState({
+        idleTime: Math.round(this.grossFloatTime() * value)
+      });
+    console.log('idle time')
+    console.log(this.state)
   },
 
   handleStartTimeChange(_, time) {
-    console.log(time.getTime())
+    console.log('start time change')
     if (this.state.endTime == null || time < this.state.endTime) {
       this.setState({
         startTime: time
@@ -75,7 +122,7 @@ Globals.RecordTripDialog = React.createClass({
     return (
       <div>
         <Dialog
-          title="Record a Trip"
+          title={this.displayFloatTime()}
           actions={actions}
           modal={true}
           open={this.props.dialogOpen}
@@ -86,21 +133,22 @@ Globals.RecordTripDialog = React.createClass({
             hintText="Float Start Time"
             pedantic={true} 
             ref="startTime"
-            defaultTime={this.state.startTime}
+            value={this.state.startTime}
             onChange={this.handleStartTimeChange} 
           />
           <TimePicker 
             hintText="Float End Time" 
             pedantic={true}
             ref="endTime" 
-            defaultTime={this.state.endTime}
-            onChange={this.handleEndTimeChange} 
+            value={this.state.endTime}
+            onChange={this.handleEndTimeChange}
           />
           <br />
           <Slider 
             value={0}
+            step={this.getSliderStepValue()}
             onChange={this.handleIdleTimeChange}
-            description="Idle time: 20min"
+            description={this.displayIdleTime()}
             disabled={this.isSliderDisabled()}
           />
         </Dialog>
