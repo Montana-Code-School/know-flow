@@ -14,7 +14,7 @@ Globals.FloatEstimate.MainActionButton = React.createClass({
 
   render() {
     return (
-      <FloatingActionButton zDepth={0} disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: '150px', right: '75px'}} >
+      <FloatingActionButton zDepth={5} disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: '150px', right: '75px'}} >
         <FontIcon className={'material-icons'} >fiber_manual_record</FontIcon>
       </FloatingActionButton>
     )
