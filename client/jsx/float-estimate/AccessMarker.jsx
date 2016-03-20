@@ -12,15 +12,7 @@ const COLORS = {
   cancel: Colors.blueGrey500
 };
 
-const ICONS = {
-  ready: SvgIcons.MapsPlace,
-  selected: SvgIcons.MapsBeenHere,
-  putIn: SvgIcons.MapsBeenHere,
-  takeOut: SvgIcons.MapsBeenHere,
-  cancel: SvgIcons.MapsPlace
-};
-
-Globals.AccessMarker = React.createClass({
+Globals.FloatEstimate.AccessMarker = React.createClass({
 
   propTypes: {
     access: React.PropTypes.object.isRequired,
@@ -36,17 +28,16 @@ Globals.AccessMarker = React.createClass({
       onClick(event)
     };
 
-    const icon = SvgIcons.MapsPlace // ICONS[mode];
     const iconColor = COLORS[mode];
 
     return (
-      <Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
-        <MarkerDivIcon iconSize={[48,48]} iconAnchor={[24,42]}>{this._iconForMode()}</MarkerDivIcon>
+      <Mapbox.Marker latlng={[access.lat, access.lng]} onClick={wrappedHandler}>
+        <Mapbox.MarkerDivIcon iconSize={[48,48]} iconAnchor={[24,42]}>{this._iconForMode()}</Mapbox.MarkerDivIcon>
 
-        <MarkerLabel className={'access-marker-label'} direction={access.labelSettings.direction} offset={access.labelSettings.offset} noHide={true}>
+        <Mapbox.MarkerLabel className={'access-marker-label'} direction={access.labelSettings.direction} offset={access.labelSettings.offset} noHide={true}>
           <Paper onClick={wrappedHandler} zDepth={3} style={{fontSize: '14px', padding: '4px', backgroundColor: Colors.amber50}}>{this.props.access.name}</Paper>
-        </MarkerLabel>
-      </Marker>
+        </Mapbox.MarkerLabel>
+      </Mapbox.Marker>
     )
   },
 

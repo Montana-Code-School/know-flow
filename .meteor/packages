@@ -35,7 +35,6 @@ npm-container
 pauloborges:mapbox
 less
 percolate:synced-cron
-izzilab:material-ui
 qnub:accounts-react-material-ui
 accounts-facebook
 service-configuration

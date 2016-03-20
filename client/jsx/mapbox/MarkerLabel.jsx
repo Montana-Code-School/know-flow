@@ -1,6 +1,6 @@
 'use strict';
 
-Globals.MarkerLabel = React.createClass({
+Globals.Mapbox.MarkerLabel = React.createClass({
 
   contextTypes: {
     marker: React.PropTypes.object.isRequired

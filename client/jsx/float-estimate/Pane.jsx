@@ -1,6 +1,6 @@
 'use strict';
 
-Globals.FloatEstimatePane = React.createClass({
+Globals.FloatEstimate.Pane = React.createClass({
   mixins: [ReactMeteorData],
 
   propTypes: {
@@ -61,8 +61,9 @@ Globals.FloatEstimatePane = React.createClass({
 
       return (
         <div id="float-estimate-pane">
-          <FloatEstimateMap accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
-          <FloatEstimateSnackbar selectedAccesses={selectedAccesses}/>
+          <FloatEstimate.Map accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
+          <FloatEstimate.MainActionButton selectedAccesses={selectedAccesses} />
+          <FloatEstimate.Snackbar selectedAccesses={selectedAccesses}/>
         </div>
       )
     } else {

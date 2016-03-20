@@ -2,7 +2,7 @@
 
 const {Dialog, FlatButton, TimePicker, Slider} = MUI;
 
-Globals.RecordTripDialog = React.createClass({
+Globals.FloatEstimate.RecordTripDialog = React.createClass({
 
   propTypes: {
     dialogOpen: React.PropTypes.bool.isRequired,
@@ -89,7 +89,7 @@ Globals.RecordTripDialog = React.createClass({
         startTime: null
       });
     }
-  },  
+  },
 
   handleEndTimeChange(_, time) {
     if (this.state.startTime == null || time > this.state.startTime) {
@@ -129,22 +129,22 @@ Globals.RecordTripDialog = React.createClass({
           onRequestClose={this.props.handleDialogClose}
         >
           Please select your start, end & idle time below.
-          <TimePicker 
+          <TimePicker
             hintText="Float Start Time"
-            pedantic={true} 
+            pedantic={true}
             ref="startTime"
             value={this.state.startTime}
             onChange={this.handleStartTimeChange} 
           />
-          <TimePicker 
-            hintText="Float End Time" 
+          <TimePicker
+            hintText="Float End Time"
             pedantic={true}
             ref="endTime" 
             value={this.state.endTime}
             onChange={this.handleEndTimeChange}
           />
           <br />
-          <Slider 
+          <Slider
             value={0}
             step={this.getSliderStepValue()}
             onChange={this.handleIdleTimeChange}

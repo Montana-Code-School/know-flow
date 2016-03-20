@@ -22,14 +22,14 @@ Globals.App = React.createClass({
     if (riverReady) {
       return (
         <UserAuthenticationContext>
-          <MapboxLoader accessToken={MAPBOX_ACCESS_TOKEN} gl={true} plugins={['label']} >
+          <Mapbox.Loader accessToken={MAPBOX_ACCESS_TOKEN} gl={false} plugins={['label']} >
             <AppCanvas>
               <GlobalTheme>
                 <Navbar river={river} />
-                <FloatEstimatePane river={river}/>
+                <FloatEstimate.Pane river={river}/>
               </GlobalTheme>
             </AppCanvas>
-          </MapboxLoader>
+          </Mapbox.Loader>
         </UserAuthenticationContext>
       )
     } else {

@@ -1,6 +1,6 @@
 'use strict';
 
-Globals.MarkerDivIcon = React.createClass({
+Globals.Mapbox.MarkerDivIcon = React.createClass({
 
   contextTypes: {
     marker: React.PropTypes.object.isRequired

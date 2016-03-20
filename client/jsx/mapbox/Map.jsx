@@ -1,6 +1,6 @@
 'use strict';
 
-Globals.Map = React.createClass({
+Globals.Mapbox.Map = React.createClass({
 
   propTypes: {
     mapId: React.PropTypes.string.isRequired,
