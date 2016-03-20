@@ -7,38 +7,42 @@ Globals.UserTrip = Astro.Class({
     riverId: {
       type: 'string',
       simpleValidator: 'required,string'
-    },
-    name: {
+    },    
+    userId: {
       type: 'string',
       simpleValidator: 'required,string'
     },
-    lat: {
-      type: 'number',
-      simpleValidator: 'required,number'
+    tripDate: {
+      type: 'string',
+      simpleValidator: 'required,string'
     },
-    lng: {
-      type: 'number',
-      simpleValidator: 'required,number'
+    putIn: {
+      type: 'string',
+      simpleValidator: 'required,string'
     },
-    riverMile: {
-      type: 'number',
-      simpleValidator: 'number'
+    takeOut: {
+      type: 'string',
+      simpleValidator: 'required,string'
+    },    
+    startTime: {
+      type: 'string',
+      simpleValidator: 'required,string'
     },
-    labelSettings: {
-      type: 'object',
-      nested: 'LabelSettings',
-      default: () => new LabelSettings()
+    EndTime: {
+      type: 'string',
+      simpleValidator: 'required,string'
+    },
+    IdleTime: {
+      type: 'string',
+      simpleValidator: 'required,string'
+    },
+    dicharge: {
+      type: 'string',
+      simpleValidator: 'required,string'
+    },
+    gageHeight: {
+      type: 'string',
+      simpleValidator: 'required,string'
     }
   }
 });
-
-tripDate
-startTime
-EndTime
-IdleTime
-riverId
-userId
-dicharge
-gageHeight
-putIn
-takeOut
