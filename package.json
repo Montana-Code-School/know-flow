@@ -1,5 +1,5 @@
 {
-  "name": "know-flow2",
+  "name": "know-flow",
   "private": true,
   "scripts": {
     "start": "meteor run"
