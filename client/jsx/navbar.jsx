@@ -33,7 +33,7 @@ export const Navbar = React.createClass({
 
     return (
       <AppBar
-        className="navbar"
+        id="navbar"
         title={`KnowFlow: ${river.name}`}
         zDepth={4}
         iconElementRight={userAuthButton}

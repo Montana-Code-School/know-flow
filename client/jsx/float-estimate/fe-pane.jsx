@@ -3,7 +3,9 @@
 import React from 'react';
 import {ReactMeteorData} from 'meteor/react-meteor-data';
 import {FE_Map} from './fe-map';
+import {FE_TripDialog} from './fe-trip-dialog';
 import {FE_ActionButton} from './fe-action-button';
+import {FE_DropdownBar} from './fe-dropdown-bar';
 import {FE_Snackbar} from './fe-snackbar';
 
 export const FE_Pane = React.createClass({
@@ -23,8 +25,21 @@ export const FE_Pane = React.createClass({
 
   getInitialState() {
     return {
+      tripDialogOpen: false,
       selectedAccesses: []
     }
+  },
+
+  openTripDialog() {
+    this.setState({
+      tripDialogOpen: true
+    })
+  },
+
+  closeTripDialog() {
+    this.setState({
+      tripDialogOpen: false
+    })
   },
 
   accessClickHandler(event) {
@@ -69,7 +84,9 @@ export const FE_Pane = React.createClass({
       return (
         <div id="float-estimate-pane">
           <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
-          <FE_ActionButton selectedAccesses={selectedAccesses} />
+          <FE_TripDialog dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} />
+          <FE_DropdownBar selectedAccesses={selectedAccesses} />
+          <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
           <FE_Snackbar selectedAccesses={selectedAccesses}/>
         </div>
       )

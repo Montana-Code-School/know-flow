@@ -4,10 +4,10 @@ import React from 'react';
 import {FloatingActionButton} from 'material-ui';
 import {AvFiberManualRecord} from 'material-ui/lib/svg-icons';
 
-
 export const FE_ActionButton = React.createClass({
   propTypes: {
-    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    onTouchTap: React.PropTypes.func.isRequired
   },
 
   isButtonDisabled() {
@@ -16,7 +16,7 @@ export const FE_ActionButton = React.createClass({
 
   render() {
     return (
-      <FloatingActionButton zDepth={3} disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: '150px', right: '75px'}} >
+      <FloatingActionButton onTouchTap={this.props.onTouchTap} zDepth={3} disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: '150px', right: '75px'}} >
         <AvFiberManualRecord />
       </FloatingActionButton>
     )

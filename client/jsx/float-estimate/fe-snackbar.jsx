@@ -16,11 +16,26 @@ export const FE_Snackbar = React.createClass({
 
   getInitialState: function() {
     return {
+      snackbarOpen: true,
       dialogOpen: false
     }
   },
 
-  handleDialogClose: function() {
+  componentWillReceiveProps(nextProps) {
+    if (this.props.selectedAccesses.length !== nextProps.selectedAccesses.length) {
+      this.setState({
+        snackbarOpen: true
+      });
+    }
+  },
+
+  handleSnackbarTimeout() {
+    this.setState({
+      snackbarOpen: false
+    })
+  },
+
+  handleDialogClose() {
     this.setState({
       dialogOpen: false
     });
@@ -60,11 +75,12 @@ export const FE_Snackbar = React.createClass({
     return (
       <div>
         <Snackbar
-          open={true}
+          open={this.state.snackbarOpen}
+          autoHideDuration={5000}
           message={ <span style={{fontSize: '18px'}}>{message}</span> }
           action={action}
           onActionTouchTap={actionTouchTap}
-          onRequestClose={ () => {} }
+          onRequestClose={ this.handleSnackbarTimeout }
           bodyStyle={{'textAlign': 'center', fontFamily: "'Roboto', sans-serif"}}
         />
         <FE_TripDialog dialogOpen={this.state.dialogOpen} handleDialogClose={this.handleDialogClose}/>
