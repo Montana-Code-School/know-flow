@@ -1,0 +1,22 @@
+@brand-1: #00897b; // dark teal
+
+#body {
+  font-size: 20px;
+
+  #map-container {
+    height: 100vh;
+  }
+
+  .leaflet-label {
+    border: 0;
+    background: none;
+
+    &:before, &:after {
+      content: none;
+    }
+  }
+
+  .leaflet-control-zoom {
+    margin-bottom: 40px;
+  }
+}
