@@ -19,9 +19,9 @@ Meteor.startup(() => {
       name: 'Bitterroot',
       defaultInstrumentId: '1',
       floatEstimateMapOptions: new MapOptions({
-        center: new LatLng({lat: 46.65, lng: -114.054}),
+        center: new LatLng({lat: 46.40, lng: -114.054}),
         maxBounds: new LatLngBounds({
-          ne: new LatLng({lat: 46.76, lng: -114.00}),
+          ne: new LatLng({lat: 46.85, lng: -114.00}),
           sw: new LatLng({lat: 45.90, lng: -114.22})
         })
       })
@@ -138,7 +138,11 @@ Meteor.startup(() => {
       name: 'Chief Looking Glass',
       lat: 46.661010,
       lng: -114.051362,
-      riverMile: 21
+      riverMile: 21,
+      labelOptions: new LabelOptions({
+        direction: 'left',
+        offset: new LatLng({lat: -24, lng: 18})
+      })
     }).save();
   }
 

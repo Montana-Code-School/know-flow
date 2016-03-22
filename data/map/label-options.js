@@ -14,7 +14,7 @@ export const LabelOptions = Astro.Class({
     offset: {
       type: 'object',
       nested: 'LatLng',
-      default: () => new LatLng({lat: 18, lng: -12}),
+      default: () => new LatLng({lat: -18, lng: 18}),
       simpleValidator: 'required,array'
     }
   }

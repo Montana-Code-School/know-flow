@@ -5,6 +5,8 @@ import {Snackbar} from 'material-ui';
 import {FE_TripDialog} from './fe-trip-dialog';
 
 const MESSAGES = {
+  'user-login': 'You are now logged into Facebook.',
+  'user-logout': 'You have been logged out.',
   'trip-saved': 'The trip has been recorded.',
   'zero-accesses': 'Please select a waypoint.',
   'one-access': 'Select another waypoint',
@@ -30,23 +32,32 @@ export const FE_Snackbar = React.createClass({
     }
   },
 
-  shouldComponentUpdate(nextProps) {
-    if (this.props.messageCode !== nextProps.messageCode) {
+  shouldComponentUpdate(nextProps, _, nextContext) {
+    if (nextProps.messageCode === 'trip-saved' || this.props.messageCode !== nextProps.messageCode) {
       return true;
     }
 
     if (this.props.selectedAccesses.length !== nextProps.selectedAccesses.length) {
       return true;
     }
+
+    if (this.context.UserAuthentication.userId !== nextContext.UserAuthentication.userId) {
+      return true;
+    }
+
     return false;
   },
 
-  componentWillUpdate(nextProps, nextState) {
+  componentWillUpdate(nextProps, nextState, nextContext) {
     let newCode = null;
     if (this.props.messageCode !== nextProps.messageCode) {
       newCode = nextProps.messageCode;
     } else if (this.props.selectedAccesses.length !== nextProps.selectedAccesses.length) {
       newCode = SELECTED_ACCESSES_CODES[nextProps.selectedAccesses.length];
+    } else if (this.context.UserAuthentication.userId !== nextContext.UserAuthentication.userId) {
+      newCode = nextContext.UserAuthentication.userId ? 'user-login' : 'user-logout';
+    } else if (nextProps.messageCode === 'trip-saved') {
+      newCode = 'trip-saved';
     }
 
     nextState.messageCode = newCode;

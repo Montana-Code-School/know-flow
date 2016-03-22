@@ -21,8 +21,7 @@ export const MarkerLabel = React.createClass({
     return {
       noHide: false,
       direction: 'right',
-      offsetX: 12,
-      offsetY: -15,
+      offset: [0, 0],
       className: ''
     }
   },
@@ -39,7 +38,7 @@ export const MarkerLabel = React.createClass({
     const {children, direction, offset, className, noHide} = this.props;
     const {marker} = this.context;
 
-    marker.bindLabel(ReactDOMServer.renderToString(children), {direction, offset, className, noHide});
+    marker.bindLabel(ReactDOMServer.renderToString(children), {direction, offset: offset.reverse(), className, noHide}); // bug fix in label lib
 
     if (noHide) {
       marker.showLabel();
