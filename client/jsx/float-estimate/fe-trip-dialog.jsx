@@ -1,21 +1,61 @@
 'use strict';
 
 import React from 'react';
-import {Dialog, FlatButton, TimePicker, Slider} from 'material-ui';
+import {Dialog, FlatButton, TimePicker, Slider, DatePicker} from 'material-ui';
+import {UserTrip} from '../../../data/data';
 
 export const FE_TripDialog = React.createClass({
 
   propTypes: {
     dialogOpen: React.PropTypes.bool.isRequired,
-    handleDialogClose: React.PropTypes.func.isRequired
+    handleDialogClose: React.PropTypes.func.isRequired,
+    river: React.PropTypes.object.isRequired,
+    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+  },
+
+  contextTypes: {
+    UserAuthentication: React.PropTypes.object.isRequired
   },
 
   getInitialState() {
     return{
+      date: new Date(),
       startTime: null,
       endTime: null,
-      idleTime: 0
+      idleTime: 0,
+      startTimeErrorMessage: null, 
+      endTimeErrorMessage: null
     }
+  },
+
+  closeDialog() {
+    this.setState({
+      date: new Date(),
+      startTime: null,
+      endTime: null,
+      idleTime: 0,
+      startTimeErrorMessage: null, 
+      endTimeErrorMessage: null
+    });
+    this.props.handleDialogClose();
+  },
+
+  saveTrip() {
+    console.log(this.props)
+    new UserTrip({
+      userId: this.context.UserAuthentication.userId,
+      riverId: this.props.river._id,
+      putIn: this.props.selectedAccesses[0]._id,
+      takeOut: this.props.selectedAccesses[1]._id,
+      tripDate: this.state.date,
+      startTime: this.state.startTime,
+      endTime: this.state.endTime,
+      idleTime: this.state.idleTime,
+      dicharge: this.props.river.defaultInstrument().currentDischarge(),
+      gageHeight: this.props.river.defaultInstrument().currentGageHeight()
+    }).save();
+
+    this.closeDialog();
   },
 
   isEndTimeDisabled() {
@@ -30,17 +70,9 @@ export const FE_TripDialog = React.createClass({
     return this.state.startTime == null || this.state.endTime == null;
   },
 
-  getSliderStepValue() {
-    if(this.state.startTime && this.state.endTime){
-      return (10 / this.grossFloatTime());
-    } else {
-      return 0;
-    }
-  },
-
   grossFloatTime() {
     if (this.state.endTime && this.state.startTime) {
-      return (this.state.endTime.getTime() - this.state.startTime.getTime()) / 60000;
+      return this.state.endTime.getTime() - this.state.startTime.getTime()
     } else {
       return null;
     }
@@ -56,38 +88,45 @@ export const FE_TripDialog = React.createClass({
     }
   },
 
-  displayFloatTime() {
-    return 'Total float time: ' + this.netFloatTime() / 60;
-  },
-
-  displayIdleTime() {
-    if(this.state.idleTime) {
-      return 'Idle time: ' + this.state.idleTime;
+  getSliderStepValue() {
+    if(this.state.startTime && this.state.endTime){
+      return 15 / (Math.round(this.grossFloatTime() / 60000));
     } else {
-      return 'Idle time: 0';
+      return 0;
     }
   },
 
-  handleIdleTimeChange(_, value) {
-    console.log('slider value')
-    console.log(value)
+  handleDateChange(_, value) {
     this.setState({
-        idleTime: Math.round(this.grossFloatTime() * value)
+        date: value
       });
-    console.log('idle time')
-    console.log(this.state)
+  },
+
+  handleIdleTimeChange(_, value) {
+    if (value > 1) {
+      this.setState({
+        idleTime: this.grossFloatTime()
+      });
+    } else {
+    this.setState({
+        idleTime: this.grossFloatTime() * value
+      });
+    }
   },
 
   handleStartTimeChange(_, time) {
-    console.log('start time change')
     if (this.state.endTime == null || time < this.state.endTime) {
       this.setState({
-        startTime: time
+        startTime: time,
+        startTimeErrorMessage: null,
+        idleTime: null
       });
     } else {
       this.refs.startTime.setTime(null);
       this.setState ({
-        startTime: null
+        startTime: null,
+        startTimeErrorMessage: 'Start Time must be before End Time',
+        idleTime: null
       });
     }
   },
@@ -95,13 +134,45 @@ export const FE_TripDialog = React.createClass({
   handleEndTimeChange(_, time) {
     if (this.state.startTime == null || time > this.state.startTime) {
       this.setState({
-        endTime: time
+        endTime: time,
+        endTimeErrorMessage: null,
+        idleTime: null
       });
     } else {
       this.refs.endTime.setTime(null);
       this.setState ({
-        endTime: null
+        endTime: null,
+        endTimeErrorMessage: 'End Time must be after Start Time',
+        idleTime: null
       });
+    }
+  },
+
+  convertMS(ms) {
+    var d, h, m, s;
+    s = Math.floor(ms / 1000);
+    m = Math.floor(s / 60);
+    s = s % 60;
+    h = Math.floor(m / 60);
+    m = m % 60;
+    d = Math.floor(h / 24);
+    h = h % 24;
+    return  h + ' hours ' + m + ' minutes';
+  },
+
+  displayFloatTime() {
+    if(this.state.endTime) {
+      return 'Total float time: ' + this.convertMS(this.netFloatTime());
+    } else {
+      return 'Total float time: 0'
+    }
+  },
+
+  displayIdleTime() {
+    if(this.state.idleTime) {
+      return 'Idle time: ' + this.convertMS(this.state.idleTime);
+    } else {
+      return 'Idle time: 0';
     }
   },
 
@@ -111,47 +182,80 @@ export const FE_TripDialog = React.createClass({
         label="Cancel"
         primary={false}
         keyboardFocused={true}
-        onTouchTap={this.props.handleDialogClose} />,
+        onTouchTap={this.closeDialog} />,
       <FlatButton
         label="Save"
         disabled={this.isSaveDisabled()}
         primary={true}
         keyboardFocused={true}
-        onTouchTap={this.props.handleDialogClose} />
+        onTouchTap={this.saveTrip} />
     ];
 
     return (
-      <div>
+      <div id='record-trip-dialog'>
         <Dialog
           title={this.displayFloatTime()}
           actions={actions}
           modal={true}
           open={this.props.dialogOpen}
-          onRequestClose={this.props.handleDialogClose}
+          onRequestClose={this.closeDialog}
         >
-          Please select your start, end & idle time below.
-          <TimePicker
-            hintText="Float Start Time"
-            pedantic={true}
-            ref="startTime"
-            value={this.state.startTime}
-            onChange={this.handleStartTimeChange}
-          />
-          <TimePicker
-            hintText="Float End Time"
-            pedantic={true}
-            ref="endTime"
-            value={this.state.endTime}
-            onChange={this.handleEndTimeChange}
-          />
-          <br />
-          <Slider
-            value={0}
-            step={this.getSliderStepValue()}
-            onChange={this.handleIdleTimeChange}
-            description={this.displayIdleTime()}
-            disabled={this.isSliderDisabled()}
-          />
+          <div className='form-group'>
+            <div className='lable'>
+              Float Date:
+            </div>
+            <div className='form-control'>
+              <DatePicker
+                hintText="Date of Float"
+                value={this.state.date}
+                onChange={this.handleDateChange}
+              />
+            </div>
+          </div>
+          <div className='form-group'>
+            <div className='lable'>
+              Float Start Time:
+            </div>
+            <div className='form-control'>
+              <TimePicker
+                hintText="Select Start Time"
+                errorText={this.state.startTimeErrorMessage}
+                pedantic={true}
+                ref="startTime"
+                value={this.state.startTime}
+                onChange={this.handleStartTimeChange}
+              />
+            </div>
+          </div>
+          <div className='form-group'>
+            <div className='lable'>
+              Float End Time:
+            </div>
+            <div className='form-control'>
+              <TimePicker
+                hintText="Select End Time"
+                errorText={this.state.endTimeErrorMessage}
+                pedantic={true}
+                ref="endTime"
+                value={this.state.endTime}
+                onChange={this.handleEndTimeChange}
+              />
+            </div>
+          </div>
+          <div className='form-group'>
+            <div className='lable'>
+              Float Idle Time:
+            </div>
+            <div className='form-control'>
+              <Slider
+                value={0}
+                step={this.getSliderStepValue()}
+                onChange={this.handleIdleTimeChange}
+                description={this.displayIdleTime()}
+                disabled={this.isSliderDisabled()}
+              />
+            </div>
+          </div>
         </Dialog>
       </div>
     );

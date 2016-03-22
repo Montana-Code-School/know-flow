@@ -11,7 +11,8 @@ export const FE_Snackbar = React.createClass({
   },
 
   propTypes: {
-    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    river: React.PropTypes.object.isRequired
   },
 
   getInitialState: function() {
@@ -67,7 +68,12 @@ export const FE_Snackbar = React.createClass({
           onRequestClose={ () => {} }
           bodyStyle={{'textAlign': 'center', fontFamily: "'Roboto', sans-serif"}}
         />
-        <FE_TripDialog dialogOpen={this.state.dialogOpen} handleDialogClose={this.handleDialogClose}/>
+        <FE_TripDialog 
+          dialogOpen={this.state.dialogOpen} 
+          handleDialogClose={this.handleDialogClose} 
+          selectedAccesses={this.props.selectedAccesses}
+          river={this.props.river}
+        />
       </div>
     );
   }

@@ -70,7 +70,7 @@ export const FE_Pane = React.createClass({
         <div id="float-estimate-pane">
           <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
           <FE_ActionButton selectedAccesses={selectedAccesses} />
-          <FE_Snackbar selectedAccesses={selectedAccesses}/>
+          <FE_Snackbar selectedAccesses={selectedAccesses} river={this.props.river}/>
         </div>
       )
     } else {
