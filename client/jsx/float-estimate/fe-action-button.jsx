@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {FloatingActionButton} from 'material-ui';
+import {Colors} from 'material-ui/lib/styles';
 import {AvFiberManualRecord} from 'material-ui/lib/svg-icons';
 
 export const FE_ActionButton = React.createClass({
@@ -16,7 +17,13 @@ export const FE_ActionButton = React.createClass({
 
   render() {
     return (
-      <FloatingActionButton onTouchTap={this.props.onTouchTap} zDepth={3} disabled={this.isButtonDisabled()} style={{position: 'absolute', bottom: '150px', right: '75px'}} >
+      <FloatingActionButton
+        onTouchTap={this.props.onTouchTap}
+        backgroundColor={Colors.red500}
+        disabledColor={Colors.blueGrey500}
+        zDepth={3}
+        disabled={this.isButtonDisabled()}
+        style={{position: 'fixed', bottom: 100, right: 50}} >
         <AvFiberManualRecord />
       </FloatingActionButton>
     )

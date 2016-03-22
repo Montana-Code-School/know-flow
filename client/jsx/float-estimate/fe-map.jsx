@@ -39,7 +39,7 @@ export const FE_Map = React.createClass({
 
     return (
       <Map mapId={MAPBOX_MAP_ID} options={this._mapOptions()} >
-        <ZoomControl position={'bottomright'} />
+        <ZoomControl position={'topright'} />
         <FE_MarkerManager accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={accessClickHandler} />
       </Map>
     )

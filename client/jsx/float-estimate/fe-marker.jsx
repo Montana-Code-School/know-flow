@@ -55,7 +55,7 @@ export const FE_Marker = React.createClass({
     } else if (mode === 'takeOut') {
       return <MapsBeenhere color={COLORS[mode]} style={{height: 48, width: 48}} />
     } else if (mode === 'cancel') {
-      return <MapsPlace zDepth={3} color={COLORS[mode]} style={{height: 48, width: 48}} />
+      return <MapsPlace color={COLORS[mode]} style={{height: 48, width: 48}} />
     } else {
       throw new Error('Unknown AccessMarker mode: ' + mode);
     }
