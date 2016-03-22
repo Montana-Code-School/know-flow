@@ -98,7 +98,7 @@ Meteor.startup(() => {
     new RiverAccess({
       _id: '9',
       riverId: '1',
-      name: '16 Bell Crossing E',
+      name: 'Bell Crossing',
       lat: 46.443837,
       lng: -114.123483,
       riverMile: 41
@@ -106,6 +106,15 @@ Meteor.startup(() => {
 
     new RiverAccess({
       _id: '10',
+      riverId: '1',
+      name: 'Stevensville Bridge',
+      lat: 46.521206,
+      lng: -114.107749,
+      riverMile: 34
+    }).save();
+
+    new RiverAccess({
+      _id: '11',
       riverId: '1',
       name: 'Bass Creek',
       lat: 46.574512,
@@ -115,7 +124,7 @@ Meteor.startup(() => {
     }).save();
 
     new RiverAccess({
-      _id: '11',
+      _id: '12',
       riverId: '1',
       name: 'Poker Joe',
       lat: 46.585088,
@@ -124,7 +133,7 @@ Meteor.startup(() => {
     }).save();
 
     new RiverAccess({
-      _id: '12',
+      _id: '13',
       riverId: '1',
       name: 'Florence Bridge',
       lat: 46.632353,
@@ -133,7 +142,7 @@ Meteor.startup(() => {
     }).save();
 
     new RiverAccess({
-      _id: '13',
+      _id: '14',
       riverId: '1',
       name: 'Chief Looking Glass',
       lat: 46.661010,

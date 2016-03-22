@@ -2,6 +2,7 @@
 
 import React from 'react';
 import {Dialog, FlatButton, TimePicker, Slider, DatePicker} from 'material-ui';
+import {Colors} from 'material-ui/lib/styles';
 import {UserTrip} from '../../../data/data';
 
 export const FE_TripDialog = React.createClass({
@@ -15,7 +16,7 @@ export const FE_TripDialog = React.createClass({
   },
 
   contextTypes: {
-    UserAuthentication: React.PropTypes.object.isRequired
+    UserAuthentication: React.PropTypes.object.isRequired,
   },
 
   getInitialState() {
@@ -57,10 +58,6 @@ export const FE_TripDialog = React.createClass({
 
     this.closeDialog();
     this.props.displaySnackbarMessage('trip-saved');
-  },
-
-  isEndTimeDisabled() {
-    return this.state.startTime == null || this.state.endTime == null;
   },
 
   isSliderDisabled() {
@@ -158,23 +155,21 @@ export const FE_TripDialog = React.createClass({
     m = m % 60;
     d = Math.floor(h / 24);
     h = h % 24;
-    return  h + ' hours ' + m + ' minutes';
+
+    const result = [];
+    h !== 0 ? result.push(`${h}h`) : null;
+    m !== 0 ? result.push(`${m}m`) : null;
+    return result.length > 0 ? result.join(' ') : '0h';
   },
 
   displayFloatTime() {
-    if(this.state.endTime) {
-      return 'Total float time: ' + this.convertMS(this.netFloatTime());
-    } else {
-      return 'Total float time: 0'
-    }
+    const floatTime = this.state.endTime ? this.convertMS(this.netFloatTime()) : '0h';
+    return 'Total Float Time: ' + floatTime;
   },
 
   displayIdleTime() {
-    if(this.state.idleTime) {
-      return 'Idle time: ' + this.convertMS(this.state.idleTime);
-    } else {
-      return 'Idle time: 0';
-    }
+    const idleTime = this.state.idleTime ? this.convertMS(this.state.idleTime) : '0h';
+    return 'Idle Time: ' + idleTime;
   },
 
   render() {
@@ -182,14 +177,13 @@ export const FE_TripDialog = React.createClass({
       <FlatButton
         label="Cancel"
         primary={false}
-        keyboardFocused={true}
         onTouchTap={this.closeDialog} />,
       <FlatButton
-        label="Save"
+        label="Record"
         disabled={this.isSaveDisabled()}
-        primary={true}
-        keyboardFocused={true}
-        onTouchTap={this.saveTrip} />
+        primary={false}
+        onTouchTap={this.saveTrip}
+        labelStyle={{color: (this.isSaveDisabled() ? Colors.grey400 : Colors.red400)}} />
     ];
 
     return (
@@ -200,10 +194,13 @@ export const FE_TripDialog = React.createClass({
           modal={true}
           open={this.props.dialogOpen}
           onRequestClose={this.closeDialog}
+          style={{}}
+          titleStyle={{backgroundColor: Colors.grey900, paddingTop: 12, paddingBottom: 12, color: Colors.red400}}
+          bodyStyle={{}}
         >
-          <div className='form-group'>
-            <div className='lable'>
-              Float Date:
+          <div className='form-group' style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}} >
+            <div className='label'>
+              Float Date: &#160;
             </div>
             <div className='form-control'>
               <DatePicker
@@ -213,9 +210,9 @@ export const FE_TripDialog = React.createClass({
               />
             </div>
           </div>
-          <div className='form-group'>
-            <div className='lable'>
-              Float Start Time:
+          <div className='form-group' style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
+            <div className='label'>
+              Start Time: &#160;
             </div>
             <div className='form-control'>
               <TimePicker
@@ -228,9 +225,9 @@ export const FE_TripDialog = React.createClass({
               />
             </div>
           </div>
-          <div className='form-group'>
-            <div className='lable'>
-              Float End Time:
+          <div className='form-group' style={{display: 'flex', justifyContent: 'flex-start', alignItems: 'center'}}>
+            <div className='label'>
+              End Time: &#160;
             </div>
             <div className='form-control'>
               <TimePicker
@@ -243,10 +240,8 @@ export const FE_TripDialog = React.createClass({
               />
             </div>
           </div>
+          <br/>
           <div className='form-group'>
-            <div className='lable'>
-              Float Idle Time:
-            </div>
             <div className='form-control'>
               <Slider
                 value={0}
