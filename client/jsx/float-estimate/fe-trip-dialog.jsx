@@ -9,6 +9,7 @@ export const FE_TripDialog = React.createClass({
   propTypes: {
     dialogOpen: React.PropTypes.bool.isRequired,
     handleDialogClose: React.PropTypes.func.isRequired,
+    displaySnackbarMessage: React.PropTypes.func.isRequired,
     river: React.PropTypes.object.isRequired,
     selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
   },
@@ -23,7 +24,7 @@ export const FE_TripDialog = React.createClass({
       startTime: null,
       endTime: null,
       idleTime: 0,
-      startTimeErrorMessage: null, 
+      startTimeErrorMessage: null,
       endTimeErrorMessage: null
     }
   },
@@ -34,14 +35,13 @@ export const FE_TripDialog = React.createClass({
       startTime: null,
       endTime: null,
       idleTime: 0,
-      startTimeErrorMessage: null, 
+      startTimeErrorMessage: null,
       endTimeErrorMessage: null
     });
     this.props.handleDialogClose();
   },
 
   saveTrip() {
-    console.log(this.props)
     new UserTrip({
       userId: this.context.UserAuthentication.userId,
       riverId: this.props.river._id,
@@ -56,6 +56,7 @@ export const FE_TripDialog = React.createClass({
     }).save();
 
     this.closeDialog();
+    this.props.displaySnackbarMessage('trip-saved');
   },
 
   isEndTimeDisabled() {

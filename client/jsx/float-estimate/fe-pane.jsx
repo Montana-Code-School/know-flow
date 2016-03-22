@@ -26,7 +26,8 @@ export const FE_Pane = React.createClass({
   getInitialState() {
     return {
       tripDialogOpen: false,
-      selectedAccesses: []
+      selectedAccesses: [],
+      snackbarMessageCode: null
     }
   },
 
@@ -39,6 +40,12 @@ export const FE_Pane = React.createClass({
   closeTripDialog() {
     this.setState({
       tripDialogOpen: false
+    })
+  },
+
+  displaySnackbarMessage(messageCode) {
+    this.setState({
+      snackbarMessageCode: messageCode
     })
   },
 
@@ -84,10 +91,10 @@ export const FE_Pane = React.createClass({
       return (
         <div id="float-estimate-pane">
           <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
-          <FE_TripDialog selectedAccesses={selectedAccesses} river={this.props.river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} />
+          <FE_TripDialog selectedAccesses={selectedAccesses} river={this.props.river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} displaySnackbarMessage={this.displaySnackbarMessage} />
           <FE_DropdownBar selectedAccesses={selectedAccesses} />
           <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
-          <FE_Snackbar message={'Fix the snackbar'} />
+          <FE_Snackbar messageCode={this.state.snackbarMessageCode} selectedAccesses={selectedAccesses}/>
         </div>
       )
     } else {
