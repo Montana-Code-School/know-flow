@@ -16,6 +16,7 @@ export const UserAuthenticationContext = React.createClass({
     return {
       servicesReady: Accounts.loginServicesConfigured(),
       loggedIn: Meteor.userId() != null,
+      userId: Meteor.userId(),
       username: Meteor.user() && Meteor.user().profile && Meteor.user().profile.name
     }
   },
@@ -25,12 +26,12 @@ export const UserAuthenticationContext = React.createClass({
   },
 
   getChildContext() {
-    const {servicesReady, loggedIn, username} = this.data;
+    const {servicesReady, loggedIn, userId, username} = this.data;
     const logout = () => Meteor.logout();
     const loginWithFacebook = () => Meteor.loginWithFacebook();
 
     return {
-      UserAuthentication: {servicesReady, loggedIn, username, logout, loginWithFacebook}
+      UserAuthentication: {servicesReady, loggedIn, userId, username, logout, loginWithFacebook}
     }
   },
 

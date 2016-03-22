@@ -11,7 +11,7 @@ export const FE_Snackbar = React.createClass({
   },
 
   propTypes: {
-    message: React.PropTypes.string
+   message: React.PropTypes.string
   },
 
   render: function () {

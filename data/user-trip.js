@@ -15,8 +15,8 @@ export const UserTrip = Astro.Class({
       simpleValidator: 'required,string'
     },
     tripDate: {
-      type: 'string',
-      simpleValidator: 'required,string'
+      type: 'date',
+      simpleValidator: 'required,date'
     },
     putIn: {
       type: 'string',
@@ -27,24 +27,24 @@ export const UserTrip = Astro.Class({
       simpleValidator: 'required,string'
     },
     startTime: {
-      type: 'string',
-      simpleValidator: 'required,string'
+      type: 'date',
+      simpleValidator: 'required,date'
     },
-    EndTime: {
-      type: 'string',
-      simpleValidator: 'required,string'
+    endTime: {
+      type: 'date',
+      simpleValidator: 'required,date'
     },
-    IdleTime: {
-      type: 'string',
-      simpleValidator: 'required,string'
+    idleTime: {
+      type: 'number',
+      simpleValidator: 'required,number'
     },
     dicharge: {
-      type: 'string',
-      simpleValidator: 'required,string'
+      type: 'number',
+      simpleValidator: 'required,number'
     },
     gageHeight: {
-      type: 'string',
-      simpleValidator: 'required,string'
+      type: 'number',
+      simpleValidator: 'required,number'
     }
   }
 });

@@ -84,10 +84,10 @@ export const FE_Pane = React.createClass({
       return (
         <div id="float-estimate-pane">
           <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
-          <FE_TripDialog dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} />
+          <FE_TripDialog selectedAccesses={selectedAccesses} river={this.props.river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} />
           <FE_DropdownBar selectedAccesses={selectedAccesses} />
           <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
-          <FE_Snackbar selectedAccesses={selectedAccesses}/>
+          <FE_Snackbar message={'Fix the snackbar'} />
         </div>
       )
     } else {
