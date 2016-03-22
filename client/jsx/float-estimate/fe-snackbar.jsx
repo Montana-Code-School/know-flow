@@ -10,7 +10,8 @@ const MESSAGES = {
   'trip-saved': 'The trip has been recorded.',
   'zero-accesses': 'Please select a waypoint.',
   'one-access': 'Select another waypoint',
-  'two-accesses': 'You may now record this trip.'
+  'two-accesses': 'You may now record this trip.',
+  'login-to-record': 'Trip recording requires login.'
 };
 
 const SELECTED_ACCESSES_CODES = ['zero-accesses', 'one-access', 'two-accesses'];
@@ -53,7 +54,11 @@ export const FE_Snackbar = React.createClass({
     if (this.props.messageCode !== nextProps.messageCode) {
       newCode = nextProps.messageCode;
     } else if (this.props.selectedAccesses.length !== nextProps.selectedAccesses.length) {
-      newCode = SELECTED_ACCESSES_CODES[nextProps.selectedAccesses.length];
+      if (! this.context.UserAuthentication.loggedIn && nextProps.selectedAccesses.length === 2) {
+        newCode = 'login-to-record'
+      } else {
+        newCode = SELECTED_ACCESSES_CODES[nextProps.selectedAccesses.length];
+      }
     } else if (this.context.UserAuthentication.userId !== nextContext.UserAuthentication.userId) {
       newCode = nextContext.UserAuthentication.userId ? 'user-login' : 'user-logout';
     } else if (nextProps.messageCode === 'trip-saved') {

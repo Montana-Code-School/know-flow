@@ -24,7 +24,7 @@ export const FE_DropdownBar = React.createClass({
 
     if (selectedAccesses.length > 0) {
 
-      let putInAvatar, takeOutAvatar;
+      let putInAvatar, takeOutAvatar, calculations;
       if (selectedAccesses.length === 1) {
         const access = selectedAccesses[0];
         putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconReady size={'small'} />} label={access.name} />;
@@ -34,6 +34,8 @@ export const FE_DropdownBar = React.createClass({
         const takeOut = selectedAccesses[1];
         putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconPutIn size={'small'} />} label={putIn.name} />;
         takeOutAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconTakeOut size={'small'} />} label={takeOut.name} />;
+
+        calculations = null;
       }
       return (
         <Paper zDepth={2} style={
@@ -45,13 +47,17 @@ export const FE_DropdownBar = React.createClass({
             height: appBarHeight,
             backgroundColor: muiTheme.snackbar.backgroundColor,
             display: 'flex',
-            alignItems: 'center',
             justifyContent: 'center'
           }
         } >
-          {putInAvatar}
-          <NavigationArrowForward color={Colors.blue500} style={{height: 36, width: 36, marginLeft: 5, marginRight: 5}}/>
-          {takeOutAvatar}
+          <div style={{display: 'flex', alignItems: 'center'}}>
+            {putInAvatar}
+            <NavigationArrowForward color={Colors.blue500} style={{height: 36, width: 36, marginLeft: 5, marginRight: 5}}/>
+            {takeOutAvatar}
+          </div>
+          <div>
+            {calculations}
+          </div>
         </Paper>
       )
     } else {

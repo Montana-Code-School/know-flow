@@ -11,8 +11,12 @@ export const FE_ActionButton = React.createClass({
     onTouchTap: React.PropTypes.func.isRequired
   },
 
+  contextTypes: {
+    UserAuthentication: React.PropTypes.object.isRequired
+  },
+
   isButtonDisabled() {
-    return this.props.selectedAccesses.length < 2;
+    return !this.context.UserAuthentication.loggedIn || this.props.selectedAccesses.length < 2;
   },
 
   render() {
