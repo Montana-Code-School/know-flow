@@ -1,6 +1,7 @@
 'use strict';
 
 import {Meteor} from 'meteor/meteor';
+import {Accounts} from 'meteor/accounts-base';
 import {ServiceConfiguration} from 'meteor/service-configuration';
 
 Meteor.startup(() => {
@@ -14,4 +15,16 @@ Meteor.startup(() => {
       $set: {appId, secret}
     }
   );
+
+  Accounts.onCreateUser(function(options, user) {
+    if (user.services && user.services.facebook) {
+      user.services.facebook.picture = "http://graph.facebook.com/" + user.services.facebook.id + "/picture/?type=large";
+    }
+
+    if (options.profile) {
+      user.profile = {...user.profile, ...options.profile};
+    }
+
+    return user;
+  });
 });
