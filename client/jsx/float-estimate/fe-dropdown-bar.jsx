@@ -35,6 +35,7 @@ export const FE_DropdownBar = React.createClass({
         putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconPutIn size={'small'} />} label={putIn.name} />;
         takeOutAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconTakeOut size={'small'} />} label={takeOut.name} />;
 
+
         calculations = null;
       }
       return (
