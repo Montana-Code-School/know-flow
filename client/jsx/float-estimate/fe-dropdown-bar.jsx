@@ -10,7 +10,8 @@ import * as MarkerIcons from './fe-marker-icons';
 export const FE_DropdownBar = React.createClass({
 
   propTypes: {
-    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired
+    selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    calculateFloatTime: React.PropTypes.func.isRequired
   },
 
   contextTypes: {
