@@ -34,6 +34,7 @@ export const Navbar = React.createClass({
         id="navbar"
         title={`KnowFlow: ${river.name}`}
         zDepth={4}
+        showMenuIconButton={false}
         iconElementRight={userAuthButton}
         style={{position: 'fixed', paddingRight: 10}}
       >

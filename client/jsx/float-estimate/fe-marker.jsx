@@ -8,7 +8,7 @@ import {Marker, MarkerDivIcon, MarkerLabel} from '../mapbox/mapbox';
 
 const COLORS = {
   ready: Colors.indigo500,
-  selected: Colors.orange500,
+  selected: Colors.orange800,
   putIn: Colors.green500,
   takeOut: Colors.red500,
   cancel: Colors.blueGrey500

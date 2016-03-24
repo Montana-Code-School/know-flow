@@ -15,7 +15,7 @@ export const FE_MarkerIconReady = (props) => <MapsPlace color={Colors.indigo500}
 FE_MarkerIconReady.propTypes = PROP_TYPES;
 FE_MarkerIconReady.defaultProps = DEFAULT_PROPS;
 
-export const FE_MarkerIconSelected = (props) => <MapsBeenhere color={Colors.orange500} style={SIZES[props.size]} />;
+export const FE_MarkerIconSelected = (props) => <MapsBeenhere color={Colors.orange800} style={SIZES[props.size]} />;
 FE_MarkerIconSelected.propTypes = PROP_TYPES;
 FE_MarkerIconSelected.defaultProps = DEFAULT_PROPS;
 

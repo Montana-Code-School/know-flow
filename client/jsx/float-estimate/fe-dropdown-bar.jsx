@@ -30,8 +30,8 @@ export const FE_DropdownBar = React.createClass({
       let putInAvatar, takeOutAvatar, calculations;
       if (selectedAccesses.length === 1) {
         const access = selectedAccesses[0];
-        putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconReady size={'small'} />} label={access.name} />;
-        takeOutAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconUnknown size={'small'} />} label={'Select an access'} />;
+        putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconSelected size={'small'} />} label={access.name} />;
+        takeOutAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconReady size={'small'} />} label={'Select an access'} />;
       } else {
         const putIn = selectedAccesses[0];
         const takeOut = selectedAccesses[1];
