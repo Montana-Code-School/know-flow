@@ -52,6 +52,18 @@ export const FE_Pane = React.createClass({
     })
   },
 
+  calculateRiverMiles() {
+    const {selectedAccesses} = this.state;
+    const putIn = selectedAccesses[0];
+    const takeOut = selectedAccesses[1];
+
+    return putIn.riverMile - takeOut.riverMile;
+  },
+
+  calculateCurrentDischarge() {
+    return this.props.river.defaultInstrument().currentDischarge();
+  },
+
   calculateFloatTimeInMinutes() {
     if (this.state.selectedAccesses.length < 2) {
       throw new Error('Can not calculate time with less than two accesses');
@@ -61,8 +73,8 @@ export const FE_Pane = React.createClass({
     const {river} = this.props;
     const putIn = selectedAccesses[0];
     const takeOut = selectedAccesses[1];
-    const discharge = river.defaultInstrument().discharge();
-    const riverMiles = putIn.riverMile - takeOut.riverMile;
+    const discharge = this.calculateCurrentDischarge();
+    const riverMiles = this.calculateRiverMiles();
 
     const currentSpeed = RIVER_MPH * discharge / RIVER_BASE_CFS;
     return Math.round(riverMiles / currentSpeed * 60);
@@ -111,7 +123,7 @@ export const FE_Pane = React.createClass({
         <div id="float-estimate-pane">
           <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
           <FE_TripDialog selectedAccesses={selectedAccesses} river={this.props.river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} displaySnackbarMessage={this.displaySnackbarMessage} />
-          <FE_DropdownBar selectedAccesses={selectedAccesses} calculateFloatTime={this.calculateFloatTimeInMinutes} />
+          <FE_DropdownBar selectedAccesses={selectedAccesses} calculateFloatTime={this.calculateFloatTimeInMinutes} calculateCurrentDischarge={this.calculateCurrentDischarge} calculateRiverMiles={this.calculateRiverMiles}  />
           <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
           <FE_Snackbar messageCode={this.state.snackbarMessageCode} selectedAccesses={selectedAccesses}/>
         </div>

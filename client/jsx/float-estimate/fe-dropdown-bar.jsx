@@ -11,7 +11,9 @@ export const FE_DropdownBar = React.createClass({
 
   propTypes: {
     selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    calculateFloatTime: React.PropTypes.func.isRequired
+    calculateFloatTime: React.PropTypes.func.isRequired,
+    calculateRiverMiles: React.PropTypes.func.isRequired,
+    calculateCurrentDischarge: React.PropTypes.func.isRequired
   },
 
   contextTypes: {
@@ -36,8 +38,15 @@ export const FE_DropdownBar = React.createClass({
         putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconPutIn size={'small'} />} label={putIn.name} />;
         takeOutAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconTakeOut size={'small'} />} label={takeOut.name} />;
 
+        const floatTime = this.props.calculateFloatTime();
+        const floatTimeStr = 'Est. Float Time: ' + Math.floor(floatTime / 60) + 'h ' + floatTime % 60 + 'm';
 
-        calculations = null;
+        const riverMiles = ' Distance: ' + this.props.calculateRiverMiles() + ' Miles ';
+        const discharge = this.props.calculateCurrentDischarge() + ' cf/s ';
+
+
+        calculations = discharge + riverMiles + floatTimeStr;
+
       }
       return (
         <Paper zDepth={2} style={
@@ -52,13 +61,17 @@ export const FE_DropdownBar = React.createClass({
             justifyContent: 'center'
           }
         } >
-          <div style={{display: 'flex', alignItems: 'center'}}>
-            {putInAvatar}
-            <NavigationArrowForward color={Colors.blue500} style={{height: 36, width: 36, marginLeft: 5, marginRight: 5}}/>
-            {takeOutAvatar}
-          </div>
-          <div>
-            {calculations}
+          <div style={{display: 'flex', flexDirection: 'column'}}>
+            <div style={{display: 'flex', alignItems: 'center'}}>
+              {putInAvatar}
+              <NavigationArrowForward color={Colors.blue500} style={{height: 36, width: 36, marginLeft: 5, marginRight: 5}}/>
+              {takeOutAvatar}
+            </div>
+            <div style={{color: Colors.blue500}}>
+           
+              {calculations}
+         
+            </div>
           </div>
         </Paper>
       )
