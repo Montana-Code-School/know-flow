@@ -1,0 +1,8 @@
+{
+  "loginServices": {
+    "facebook": {
+      "appId": "1025598267515200",
+      "secret": "52538cce4fb167a50aef3040087e447e"
+    }
+  }
+}
