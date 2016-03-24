@@ -51,7 +51,7 @@ export const FE_Snackbar = React.createClass({
 
   componentWillUpdate(nextProps, nextState, nextContext) {
     let newCode = null;
-    if (this.props.messageCode !== nextProps.messageCode) {
+    if (nextProps.messageCode && this.props.messageCode !== nextProps.messageCode) {
       newCode = nextProps.messageCode;
     } else if (this.props.selectedAccesses.length !== nextProps.selectedAccesses.length) {
       if (! this.context.UserAuthentication.loggedIn && nextProps.selectedAccesses.length === 2) {
@@ -63,6 +63,8 @@ export const FE_Snackbar = React.createClass({
       newCode = nextContext.UserAuthentication.userId ? 'user-login' : 'user-logout';
     } else if (nextProps.messageCode === 'trip-saved') {
       newCode = 'trip-saved';
+    } else {
+      newCode = SELECTED_ACCESSES_CODES[nextProps.selectedAccesses.length];
     }
 
     nextState.messageCode = newCode;

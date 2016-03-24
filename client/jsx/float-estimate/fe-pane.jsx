@@ -9,7 +9,7 @@ import {FE_DropdownBar} from './fe-dropdown-bar';
 import {FE_Snackbar} from './fe-snackbar';
 
 const RIVER_MPH = 1.65;
-const RIVER_BASE_CFS = 1470;
+const RIVER_BASE_CFS = 950;
 
 export const FE_Pane = React.createClass({
   mixins: [ReactMeteorData],
@@ -20,10 +20,12 @@ export const FE_Pane = React.createClass({
 
   getMeteorData() {
     const accesses = this.props.river.accesses().fetch();
+    const defaultInstrument = this.props.river.defaultInstrument();
+    const currentDischarge = defaultInstrument ? defaultInstrument.currentDischarge() : 0;
     return {
       accesses: accesses,
-      accessesReady: accesses.length > 0,
-      currentDischarge: this.props.river.defaultInstrument().currentDischarge()
+      currentDischarge: currentDischarge,
+      dataReady: accesses.length > 0 && defaultInstrument && currentDischarge
     };
   },
 
@@ -67,14 +69,15 @@ export const FE_Pane = React.createClass({
 
   calculateFloatTimeInMinutes() {
     const {selectedAccesses} = this.state;
-    if (selectedAccesses.length < 2) {
+    const discharge = this.data.currentDischarge;
+
+    if (selectedAccesses.length < 2 || !discharge) {
       return 0;
     }
 
     const {river} = this.props;
     const putIn = selectedAccesses[0];
     const takeOut = selectedAccesses[1];
-    const discharge = this.data.currentDischarge;
     const riverMiles = this.calculateRiverMiles();
 
     const currentSpeed = RIVER_MPH * discharge / RIVER_BASE_CFS;
@@ -110,12 +113,13 @@ export const FE_Pane = React.createClass({
     }
 
     this.setState({
-      selectedAccesses: newSelectedAccesses
+      selectedAccesses: newSelectedAccesses,
+      snackbarMessageCode: null
     });
   },
 
   render() {
-    if (this.data.accessesReady) {
+    if (this.data.dataReady) {
       const {floatEstimateMapOptions} = this.props.river;
       const {accesses} = this.data;
       const {selectedAccesses} = this.state;
