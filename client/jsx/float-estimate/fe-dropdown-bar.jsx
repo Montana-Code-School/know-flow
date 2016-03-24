@@ -42,7 +42,7 @@ export const FE_DropdownBar = React.createClass({
 
         calculations = (
           <div style={{color: Colors.blue500, paddingBottom: 8}}>
-            Float Time: <span style={{color: Colors.amber400}}>{prettyFloatTime}</span> ({riverMiles} Miles @ {currentDischarge} f&#179;/s)
+            Est. Float Time: <span style={{color: Colors.amber400}}>{prettyFloatTime}</span> ({riverMiles} Miles @ {currentDischarge} f&#179;/s)
           </div>
         );
       }

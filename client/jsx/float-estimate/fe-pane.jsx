@@ -22,7 +22,8 @@ export const FE_Pane = React.createClass({
     const accesses = this.props.river.accesses().fetch();
     return {
       accesses: accesses,
-      accessesReady: accesses.length > 0
+      accessesReady: accesses.length > 0,
+      currentDischarge: this.props.river.defaultInstrument().currentDischarge()
     };
   },
 
@@ -64,10 +65,6 @@ export const FE_Pane = React.createClass({
     return putIn.riverMile - takeOut.riverMile;
   },
 
-  calculateCurrentDischarge() {
-    return this.props.river.defaultInstrument().currentDischarge();
-  },
-
   calculateFloatTimeInMinutes() {
     const {selectedAccesses} = this.state;
     if (selectedAccesses.length < 2) {
@@ -77,7 +74,7 @@ export const FE_Pane = React.createClass({
     const {river} = this.props;
     const putIn = selectedAccesses[0];
     const takeOut = selectedAccesses[1];
-    const discharge = this.calculateCurrentDischarge();
+    const discharge = this.data.currentDischarge;
     const riverMiles = this.calculateRiverMiles();
 
     const currentSpeed = RIVER_MPH * discharge / RIVER_BASE_CFS;
@@ -130,7 +127,7 @@ export const FE_Pane = React.createClass({
           <FE_DropdownBar
             selectedAccesses={selectedAccesses}
             floatTime={this.calculateFloatTimeInMinutes()}
-            currentDischarge={this.calculateCurrentDischarge()}
+            currentDischarge={this.data.currentDischarge}
             riverMiles={this.calculateRiverMiles()}
           />
           <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />

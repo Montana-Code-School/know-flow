@@ -36,7 +36,8 @@ export const RiverInstrument = Astro.Class({
       return this._currentDatum(RiverInstrument.DISCHARGE_CODE);
     },
     _currentDatum(paramCode) {
-      return this.data().fetch().filter(d => d.paramCode === paramCode).reduce((d1, d2) => d1.timestamp > d2.timestamp ? d1 : d2).paramValue;
+      const dataForCode = this.data().fetch().filter(d => d.paramCode === paramCode);
+      return dataForCode.length ? dataForCode.reduce((d1, d2) => d1.timestamp > d2.timestamp ? d1 : d2).paramValue : 0;
     }
   },
   relations: {

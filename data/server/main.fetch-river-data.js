@@ -47,13 +47,13 @@ Meteor.startup(() => {
     schedule: (parser) => parser.text('every 15 minutes'),
     job: fetchRiverDataFromUSGS
   });
-
+/*
   SyncedCron.add({
     name: 'Purge old river data',
     schedule: (parser) => parser.text('every 1 day'),
     job: purgeOldRiverData
   });
-
+*/
   SyncedCron.start();
 
   fetchRiverDataFromUSGS();
