@@ -16,7 +16,7 @@ export const DropdownBarAvatar = React.createClass({
 
     return (
       <div style={{display: 'flex', alignItems: 'center'}}>
-        <Avatar icon={icon} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '8px'}} />
+        <Avatar icon={icon} size={33} style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginRight: '8px'}} />
         <span style={{color: Colors.grey500}}>{label}</span>
       </div>
     )

@@ -55,4 +55,6 @@ Meteor.startup(() => {
   });
 
   SyncedCron.start();
+
+  fetchRiverDataFromUSGS();
 });

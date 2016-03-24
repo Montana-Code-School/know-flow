@@ -21,15 +21,18 @@ export const FE_ActionButton = React.createClass({
 
   render() {
     return (
-      <FloatingActionButton
-        onTouchTap={this.props.onTouchTap}
-        backgroundColor={Colors.red500}
-        disabledColor={Colors.blueGrey500}
-        zDepth={3}
-        disabled={this.isButtonDisabled()}
-        style={{position: 'fixed', bottom: 100, right: 50}} >
-        <AvFiberManualRecord />
-      </FloatingActionButton>
+      <div style={{position: 'fixed', bottom: 80, right: 50, display: 'flex', flexDirection: 'column', alignItems: 'center', fontSize: 20}}>
+        <FloatingActionButton
+          onTouchTap={this.props.onTouchTap}
+          backgroundColor={Colors.red500}
+          disabledColor={Colors.blueGrey500}
+          zDepth={3}
+          disabled={this.isButtonDisabled()}
+        >
+          <AvFiberManualRecord />
+        </FloatingActionButton>
+        <div style={{paddingTop: 2, color: this.isButtonDisabled() ? Colors.blueGrey500 : Colors.red500}}>Record</div>
+      </div>
     )
   }
 });

@@ -19,7 +19,7 @@ Meteor.startup(() => {
       name: 'Bitterroot',
       defaultInstrumentId: '1',
       floatEstimateMapOptions: new MapOptions({
-        center: new LatLng({lat: 46.40, lng: -114.054}),
+        center: new LatLng({lat: 46.405, lng: -114.054}),
         maxBounds: new LatLngBounds({
           ne: new LatLng({lat: 46.85, lng: -114.00}),
           sw: new LatLng({lat: 45.90, lng: -114.22})

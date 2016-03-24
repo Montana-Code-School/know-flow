@@ -54,6 +54,10 @@ export const FE_Pane = React.createClass({
 
   calculateRiverMiles() {
     const {selectedAccesses} = this.state;
+    if (selectedAccesses.length < 2) {
+      return 0;
+    }
+
     const putIn = selectedAccesses[0];
     const takeOut = selectedAccesses[1];
 
@@ -65,11 +69,11 @@ export const FE_Pane = React.createClass({
   },
 
   calculateFloatTimeInMinutes() {
-    if (this.state.selectedAccesses.length < 2) {
-      throw new Error('Can not calculate time with less than two accesses');
+    const {selectedAccesses} = this.state;
+    if (selectedAccesses.length < 2) {
+      return 0;
     }
 
-    const {selectedAccesses} = this.state;
     const {river} = this.props;
     const putIn = selectedAccesses[0];
     const takeOut = selectedAccesses[1];
@@ -123,7 +127,12 @@ export const FE_Pane = React.createClass({
         <div id="float-estimate-pane">
           <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
           <FE_TripDialog selectedAccesses={selectedAccesses} river={this.props.river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} displaySnackbarMessage={this.displaySnackbarMessage} />
-          <FE_DropdownBar selectedAccesses={selectedAccesses} calculateFloatTime={this.calculateFloatTimeInMinutes} calculateCurrentDischarge={this.calculateCurrentDischarge} calculateRiverMiles={this.calculateRiverMiles}  />
+          <FE_DropdownBar
+            selectedAccesses={selectedAccesses}
+            floatTime={this.calculateFloatTimeInMinutes()}
+            currentDischarge={this.calculateCurrentDischarge()}
+            riverMiles={this.calculateRiverMiles()}
+          />
           <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
           <FE_Snackbar messageCode={this.state.snackbarMessageCode} selectedAccesses={selectedAccesses}/>
         </div>

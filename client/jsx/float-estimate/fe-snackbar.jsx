@@ -77,8 +77,8 @@ export const FE_Snackbar = React.createClass({
       <div>
         <Snackbar
           open={true}
-          autoHideDuration={4000}
-          message={ <span style={{fontSize: '18px'}}>{message}</span> }
+          autoHideDuration={5000}
+          message={ <span style={{fontSize: 20}}>{message}</span> }
           action={action}
           onActionTouchTap={loginWithFacebook}
           bodyStyle={{'textAlign': 'center', fontFamily: "'Roboto', sans-serif"}}

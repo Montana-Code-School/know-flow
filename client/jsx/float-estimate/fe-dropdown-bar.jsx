@@ -11,9 +11,9 @@ export const FE_DropdownBar = React.createClass({
 
   propTypes: {
     selectedAccesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
-    calculateFloatTime: React.PropTypes.func.isRequired,
-    calculateRiverMiles: React.PropTypes.func.isRequired,
-    calculateCurrentDischarge: React.PropTypes.func.isRequired
+    floatTime: React.PropTypes.number.isRequired,
+    riverMiles: React.PropTypes.number.isRequired,
+    currentDischarge: React.PropTypes.number.isRequired
   },
 
   contextTypes: {
@@ -21,7 +21,7 @@ export const FE_DropdownBar = React.createClass({
   },
 
   render() {
-    const {selectedAccesses} = this.props;
+    const {selectedAccesses, floatTime, currentDischarge, riverMiles} = this.props;
     const {muiTheme} = this.context;
     const appBarHeight = muiTheme.appBar.height;
 
@@ -38,15 +38,13 @@ export const FE_DropdownBar = React.createClass({
         putInAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconPutIn size={'small'} />} label={putIn.name} />;
         takeOutAvatar = <DropdownBarAvatar icon={<MarkerIcons.FE_MarkerIconTakeOut size={'small'} />} label={takeOut.name} />;
 
-        const floatTime = this.props.calculateFloatTime();
-        const floatTimeStr = 'Est. Float Time: ' + Math.floor(floatTime / 60) + 'h ' + floatTime % 60 + 'm';
+        const prettyFloatTime = Math.floor(floatTime / 60) + 'h ' + floatTime % 60 + 'm';
 
-        const riverMiles = ' Distance: ' + this.props.calculateRiverMiles() + ' Miles ';
-        const discharge = this.props.calculateCurrentDischarge() + ' cf/s ';
-
-
-        calculations = discharge + riverMiles + floatTimeStr;
-
+        calculations = (
+          <div style={{color: Colors.blue500, paddingBottom: 8}}>
+            Float Time: <span style={{color: Colors.amber400}}>{prettyFloatTime}</span> ({riverMiles} Miles @ {currentDischarge} f&#179;/s)
+          </div>
+        );
       }
       return (
         <Paper zDepth={2} style={
@@ -55,23 +53,18 @@ export const FE_DropdownBar = React.createClass({
             top: appBarHeight,
             left: 0,
             right: 0,
-            height: appBarHeight,
             backgroundColor: muiTheme.snackbar.backgroundColor,
             display: 'flex',
             justifyContent: 'center'
           }
         } >
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <div style={{display: 'flex', alignItems: 'center'}}>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <div style={{display: 'flex', alignItems: 'center', paddingTop: 8, paddingBottom: 8}}>
               {putInAvatar}
               <NavigationArrowForward color={Colors.blue500} style={{height: 36, width: 36, marginLeft: 5, marginRight: 5}}/>
               {takeOutAvatar}
             </div>
-            <div style={{color: Colors.blue500}}>
-           
-              {calculations}
-         
-            </div>
+            {calculations}
           </div>
         </Paper>
       )
