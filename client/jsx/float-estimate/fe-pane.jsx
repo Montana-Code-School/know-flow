@@ -1,7 +1,6 @@
 'use strict';
 
 import React from 'react';
-import {ReactMeteorData} from 'meteor/react-meteor-data';
 import {FE_Map} from './fe-map';
 import {FE_TripDialog} from './fe-trip-dialog';
 import {FE_ActionButton} from './fe-action-button';
@@ -12,21 +11,11 @@ const RIVER_MPH = 1.65;
 const RIVER_BASE_CFS = 950;
 
 export const FE_Pane = React.createClass({
-  mixins: [ReactMeteorData],
 
   propTypes: {
-    river: React.PropTypes.object.isRequired
-  },
-
-  getMeteorData() {
-    const accesses = this.props.river.accesses().fetch();
-    const defaultInstrument = this.props.river.defaultInstrument();
-    const currentDischarge = defaultInstrument ? defaultInstrument.currentDischarge() : 0;
-    return {
-      accesses: accesses,
-      currentDischarge: currentDischarge,
-      dataReady: accesses.length > 0 && defaultInstrument && currentDischarge
-    };
+    river: React.PropTypes.object.isRequired,
+    accesses: React.PropTypes.arrayOf(React.PropTypes.object).isRequired,
+    currentDischarge: React.PropTypes.number.isRequired
   },
 
   getInitialState() {
@@ -69,7 +58,7 @@ export const FE_Pane = React.createClass({
 
   calculateFloatTimeInMinutes() {
     const {selectedAccesses} = this.state;
-    const discharge = this.data.currentDischarge;
+    const discharge = this.props.currentDischarge;
 
     if (selectedAccesses.length < 2 || !discharge) {
       return 0;
@@ -119,27 +108,22 @@ export const FE_Pane = React.createClass({
   },
 
   render() {
-    if (this.data.dataReady) {
-      const {floatEstimateMapOptions} = this.props.river;
-      const {accesses} = this.data;
-      const {selectedAccesses} = this.state;
+    const {river, accesses, currentDischarge} = this.props;
+    const {selectedAccesses} = this.state;
 
-      return (
-        <div id="float-estimate-pane">
-          <FE_Map mapOptions={floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
-          <FE_TripDialog selectedAccesses={selectedAccesses} river={this.props.river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} displaySnackbarMessage={this.displaySnackbarMessage} />
-          <FE_DropdownBar
-            selectedAccesses={selectedAccesses}
-            floatTime={this.calculateFloatTimeInMinutes()}
-            currentDischarge={this.data.currentDischarge}
-            riverMiles={this.calculateRiverMiles()}
-          />
-          <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
-          <FE_Snackbar messageCode={this.state.snackbarMessageCode} selectedAccesses={selectedAccesses}/>
-        </div>
-      )
-    } else {
-      return null;
-    }
+    return (
+      <div id="float-estimate-pane">
+        <FE_Map mapOptions={river.floatEstimateMapOptions} accesses={accesses} selectedAccesses={selectedAccesses} accessClickHandler={this.accessClickHandler}/>
+        <FE_TripDialog selectedAccesses={selectedAccesses} river={river} dialogOpen={this.state.tripDialogOpen} handleDialogClose={this.closeTripDialog} displaySnackbarMessage={this.displaySnackbarMessage} />
+        <FE_DropdownBar
+          selectedAccesses={selectedAccesses}
+          floatTime={this.calculateFloatTimeInMinutes()}
+          currentDischarge={currentDischarge}
+          riverMiles={this.calculateRiverMiles()}
+        />
+        <FE_ActionButton selectedAccesses={selectedAccesses} onTouchTap={this.openTripDialog} />
+        <FE_Snackbar messageCode={this.state.snackbarMessageCode} selectedAccesses={selectedAccesses}/>
+      </div>
+    )
   }
 });

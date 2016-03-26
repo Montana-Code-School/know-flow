@@ -14,12 +14,13 @@ export const UserAuthenticationContext = React.createClass({
 
   getMeteorData: function () {
     const user = Meteor.user();
+
     return {
       servicesReady: Accounts.loginServicesConfigured(),
       loggedIn: user != null,
       userId: user && user._id,
       username: user && user.profile && user.profile.name,
-      profilePicture: user && user.services.facebook && user.services.facebook.picture
+      profilePicture: user && user.services && user.services.facebook && user.services.facebook.picture
     }
   },
 
@@ -37,6 +38,6 @@ export const UserAuthenticationContext = React.createClass({
   },
 
   render() {
-    return this.props.children;
+    return <div>{this.props.children}</div>
   }
 });

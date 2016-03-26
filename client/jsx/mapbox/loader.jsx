@@ -45,7 +45,7 @@ export const Loader = React.createClass({
         L.mapbox.accessToken = this.props.accessToken;
       }
 
-      return children;
+      return <div key={'mapbox-loader'}>{children}</div>;
     } else {
       return null;
     }
