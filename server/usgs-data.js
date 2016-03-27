@@ -1,6 +1,7 @@
 'use strict';
 
-import {RiverInstrument, RiverDatum} from '../data';
+import {RiverInstrument, RiverDatum} from '../data/data';
+import './populate-db';
 
 const NUM_RIVER_DATUM_TO_KEEP = 1000;
 

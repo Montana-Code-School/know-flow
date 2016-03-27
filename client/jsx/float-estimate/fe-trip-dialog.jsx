@@ -120,7 +120,6 @@ export const FE_TripDialog = React.createClass({
         idleTime: null
       });
     } else {
-      this.refs.startTime.setTime(null);
       this.setState ({
         startTime: null,
         startTimeErrorMessage: 'Start Time must be before End Time',
@@ -137,7 +136,6 @@ export const FE_TripDialog = React.createClass({
         idleTime: null
       });
     } else {
-      this.refs.endTime.setTime(null);
       this.setState ({
         endTime: null,
         endTimeErrorMessage: 'End Time must be after Start Time',

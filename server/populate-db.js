@@ -1,7 +1,7 @@
 'use strict';
 
-import {River, RiverAccess, RiverInstrument} from '../data';
-import {MapOptions, LabelOptions, LatLng, LatLngBounds} from '../map/map';
+import {River, RiverAccess, RiverInstrument} from '../data/data';
+import {MapOptions, LabelOptions, LatLng, LatLngBounds} from '../data/map/map';
 
 Meteor.startup(() => {
   if (process.env.NODE_ENV === 'production') {
