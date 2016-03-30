@@ -15,5 +15,6 @@
     "react-mounter": "^1.1.0",
     "react-tap-event-plugin": "^0.2.2",
     "react-universal": "0.0.3"
-  }
+  },
+  "license": "MIT"
 }
